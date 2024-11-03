@@ -19,6 +19,7 @@ return {
 						mappings = {
 							["n"] = {
 								["-"] = fb_actions.goto_parent_dir,
+								["%"] = fb_actions.create,
 							},
 						},
 					}
