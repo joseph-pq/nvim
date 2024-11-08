@@ -142,17 +142,6 @@ return {
 		"iamcco/markdown-preview.nvim",
 		run = function() vim.fn["mkdp#util#install"]() end,
 	},
-	-- debug
-	{ "mfussenegger/nvim-dap" },
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-		}
-	},
-	{ "theHamsta/nvim-dap-virtual-text" },
-	{ "nvim-telescope/telescope-dap.nvim" },
-	{ "mfussenegger/nvim-dap-python" },
 	-- misc
 	{ -- execute some things
 		'stevearc/overseer.nvim',
