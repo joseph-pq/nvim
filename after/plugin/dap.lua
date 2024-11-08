@@ -23,12 +23,13 @@ vim.keymap.set("n", "<leader>di", dap.step_into)
 vim.keymap.set("n", "<leader>do", dap.step_over)
 vim.keymap.set("n", "<leader>dr", dap.repl.open)
 vim.keymap.set("n", "<leader>ds", dap.close)
+vim.keymap.set("n", "<leader>dt", dap.terminate)
 
 
 -- set some custom styles for the debugger
 local dap_breakpoint = {
 	error = {
-		text = "🟥",
+		text = "",
 		texthl = "LspDiagnosticsSignError",
 		linehl = "",
 		numhl = "",
@@ -55,7 +56,7 @@ vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
 require("nvim-dap-virtual-text").setup {
 	commented = true,
 }
-local dapui = require "dapui"
+local dapui = require("dapui")
 dapui.setup {} -- use default
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
