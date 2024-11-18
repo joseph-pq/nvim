@@ -49,6 +49,7 @@ return {
 			prompts = prompts,
 			auto_follow_cursor = false, -- Don't follow the cursor after getting response
 			show_help = false, -- Show help in virtual text, set to true if that's 1st time using Copilot Chat
+			chat_autocomplete = true,
 			mappings = {
 				-- Use tab for completion
 				complete = {
@@ -116,8 +117,6 @@ return {
 			}
 
 			chat.setup(opts)
-			-- Setup the CMP integration
-			require("CopilotChat.integrations.cmp").setup()
 
 			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
 				chat.ask(args.args, { selection = select.visual })
