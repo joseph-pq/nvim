@@ -179,6 +179,18 @@ return {
 	{ 'preservim/vimux' },
 
 	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		config = function()
+			require('render-markdown').setup({
+				file_types = { "markdown", "Avante" },
+				heading = {
+					backgrounds = {}
+
+				},
+			})
+		end,
+	},
+	{
 		'yetone/avante.nvim',
 		build = "make",
 		lazy = false,
@@ -189,14 +201,7 @@ return {
 			'stevearc/dressing.nvim',
 			'nvim-lua/plenary.nvim',
 			'MunifTanjim/nui.nvim',
-			{
-				'MeanderingProgrammer/render-markdown.nvim',
-				config = function()
-					require('render-markdown').setup({
-						file_types = { "markdown", "Avante" },
-					})
-				end,
-			},
+		'MeanderingProgrammer/render-markdown.nvim',
 		},
 		config = function()
 			require('avante.config')
