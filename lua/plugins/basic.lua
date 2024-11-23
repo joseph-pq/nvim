@@ -77,7 +77,7 @@ return {
 	-- With the dev option, you can easily switch between the local and installed version of a plugin
 	{ "folke/noice.nvim",                         dev = true },
 	-- Highlight, edit, and navigate code
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
 	{
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		dependencies = { 'nvim-treesitter' }
@@ -201,7 +201,7 @@ return {
 			'stevearc/dressing.nvim',
 			'nvim-lua/plenary.nvim',
 			'MunifTanjim/nui.nvim',
-		'MeanderingProgrammer/render-markdown.nvim',
+		    'MeanderingProgrammer/render-markdown.nvim',
 		},
 		config = function()
 			require('avante.config')
