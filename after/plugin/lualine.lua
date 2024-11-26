@@ -1,3 +1,33 @@
+local ts_utils = require("nvim-treesitter.ts_utils")
+
+local function get_item_chain()
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    return "No Treesitter node found at cursor"
+  end
+
+  local chain = {}
+  local current_node = node
+
+  -- Traverse up the tree to find the class and function nodes
+  while current_node do
+    local node_type = current_node:type()
+    if node_type == "class_definition" then
+      -- For Python, class names are identifiers
+      local class_name = ts_utils.get_node_text(current_node:field("name")[1], 0)[1]
+      table.insert(chain, 1, class_name)
+    elseif node_type == "function_definition" then
+      -- For Python, function names are identifiers
+      local func_name = ts_utils.get_node_text(current_node:field("name")[1], 0)[1]
+      table.insert(chain, 1, func_name)
+    end
+    current_node = current_node:parent()
+  end
+
+  -- Return the chain joined by ":"
+  return table.concat(chain, ":")
+end
+
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
@@ -20,11 +50,14 @@ require('lualine').setup {
 	sections = {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = { 'filename' },
+		lualine_c = {
+			'filename',
+			get_item_chain
+		},
 		lualine_x = {
-			'copilot',
-			'encoding',
-			'fileformat',
+			-- 'copilot',
+			-- 'encoding',
+			-- 'fileformat',
 			'filetype',
 		},
 		lualine_y = { 'progress' },
