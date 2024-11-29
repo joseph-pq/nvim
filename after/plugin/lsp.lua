@@ -21,7 +21,7 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'rust_analyzer', 'pyright', 'ruff', 'texlab', 'typescript-language-server' },
+  ensure_installed = { 'rust_analyzer', 'pyright', 'ruff', 'texlab', 'ts_ls' },
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -65,6 +65,7 @@ cmp.setup({
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+
 lspconfig["pyright"].setup({
   capabilities = capabilities,
   settings = {
@@ -72,6 +73,15 @@ lspconfig["pyright"].setup({
       analysis = {
         diagnosticMode = "workspace",
       }
+    }
+  }
+})
+
+lspconfig["ts_ls"].setup({
+  capabilities = capabilities,
+  init_options = {
+    preferences = {
+      disableSuggestions = true,
     }
   }
 })
