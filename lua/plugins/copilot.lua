@@ -22,6 +22,7 @@ return {
 			{ "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
 			{ "nvim-lua/plenary.nvim" },
 		},
+		branch= "main",
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 			chat.setup(opts)
