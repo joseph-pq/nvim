@@ -13,5 +13,6 @@ return {
 	    'olacin/telescope-cc.nvim',
 	    'nvim-lua/plenary.nvim',
 	},
-    }
+    },
+    { 'sindrets/diffview.nvim' },
 }
