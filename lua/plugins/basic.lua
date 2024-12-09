@@ -68,7 +68,7 @@ return {
 	-- local plugins can also be configured with the dev option.
 	-- With the dev option, you can easily switch between the local and installed version of a plugin
 	-- Highlight, edit, and navigate code
-	{ "nvim-treesitter/nvim-treesitter",          build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		dependencies = { 'nvim-treesitter' }
@@ -171,12 +171,37 @@ return {
 
 	{
 		'MeanderingProgrammer/render-markdown.nvim',
+		-- enabled = false,
 		config = function()
 			require('render-markdown').setup({
 				file_types = { "markdown", "Avante" },
 				heading = {
 					backgrounds = {}
-
+				},
+				checkbox = {
+					enabled = true,
+					unchecked = {
+						-- Replaces '[ ]' of 'task_list_marker_unchecked'
+						icon = '󰄱 ',
+						-- Highlight for the unchecked icon
+						highlight = 'RenderMarkdownUnchecked',
+						-- Highlight for item associated with unchecked checkbox
+						scope_highlight = nil,
+					},
+					checked = {
+						-- Replaces '[x]' of 'task_list_marker_checked'
+						icon = '',
+						-- Highlight for the checked icon
+						highlight = 'RenderMarkdownChecked',
+						-- Highlight for item associated with checked checkbox
+						scope_highlight = nil,
+					},
+					custom = {
+						todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+						in_progress = { raw = "[>]", rendered = "", hl_group = "ObsidianRightArrow" },
+						canceled = { raw = "[~]", rendered = "󰰱", hl_group = "ObsidianTilde" },
+						important = { raw = "[!]", rendered = "", hl_group = "ObsidianImportant" },
+					}
 				},
 			})
 		end,
@@ -192,7 +217,7 @@ return {
 			'stevearc/dressing.nvim',
 			'nvim-lua/plenary.nvim',
 			'MunifTanjim/nui.nvim',
-		    'MeanderingProgrammer/render-markdown.nvim',
+			'MeanderingProgrammer/render-markdown.nvim',
 		},
 		config = function()
 			require('avante.config')
