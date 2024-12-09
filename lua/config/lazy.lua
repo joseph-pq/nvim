@@ -34,7 +34,7 @@ require("lazy").setup({
   checker = {
     enabled = true,
     concurrency = 2,
-    notify = true,
+    notify = false,
     frequency = 86400, -- 1 day
   },
 })
