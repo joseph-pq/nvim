@@ -94,7 +94,9 @@ lspconfig["ts_ls"].setup({
 
 
 -- Configuring Ruff
-lspconfig.ruff.setup({})
+lspconfig.ruff.setup({
+  capabilities = capabilities,
+})
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
