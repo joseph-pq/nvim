@@ -129,10 +129,6 @@ return {
 			"nvim-neotest/neotest-python",
 		}
 	},
-	{
-		"iamcco/markdown-preview.nvim",
-		run = function() vim.fn["mkdp#util#install"]() end,
-	},
 	-- misc
 	{ -- execute some things
 		'stevearc/overseer.nvim',
