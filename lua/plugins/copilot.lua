@@ -22,7 +22,7 @@ return {
 			{ "nvim-telescope/telescope.nvim" }, -- Use telescope for help actions
 			{ "nvim-lua/plenary.nvim" },
 		},
-		branch= "main",
+		branch = "main",
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 			chat.setup(opts)
@@ -91,11 +91,11 @@ return {
 			},
 			-- Quick chat with Copilot
 			{
-				"<leader>aq",
+				"<leader>ccq",
 				function()
 					local input = vim.fn.input("Quick Chat: ")
 					if input ~= "" then
-						vim.cmd("CopilotChatBuffer " .. input)
+						require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
 					end
 				end,
 				desc = "CopilotChat - Quick chat",
