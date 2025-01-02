@@ -75,7 +75,6 @@ return {
 	},
 	--- This is used for my own plugins
 	{ 'nvim-treesitter/playground' },
-	{ 'theprimeagen/harpoon' },
 	{ 'mbbill/undotree' },
 
 	{
