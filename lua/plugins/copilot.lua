@@ -3,18 +3,27 @@ return {
 	{ 'github/copilot.vim' },
 	{
 		"folke/which-key.nvim",
-		optional = true,
-		opts = {
-			spec = {
-				{ "<leader>a", group = "ai" },
-				{ "gm",        group = "+Copilot chat" },
-				{ "gmh",       desc = "Show help" },
-				{ "gmd",       desc = "Show diff" },
-				{ "gmp",       desc = "Show system prompt" },
-				{ "gms",       desc = "Show selection" },
-				{ "gmy",       desc = "Yank diff" },
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
 			},
 		},
+		-- opts = {
+		-- 	spec = {
+		-- 		{ "<leader>a", group = "ai" },
+		-- 		{ "gm",        group = "+Copilot chat" },
+		-- 		{ "gmh",       desc = "Show help" },
+		-- 		{ "gmd",       desc = "Show diff" },
+		-- 		{ "gmp",       desc = "Show system prompt" },
+		-- 		{ "gms",       desc = "Show selection" },
+		-- 		{ "gmy",       desc = "Yank diff" },
+		-- 	},
+		-- },
 	},
 	{
 		'CopilotC-Nvim/CopilotChat.nvim',
