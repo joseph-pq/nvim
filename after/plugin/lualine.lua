@@ -14,11 +14,11 @@ local function get_item_chain()
     local node_type = current_node:type()
     if node_type == "class_definition" then
       -- For Python, class names are identifiers
-      local class_name = ts_utils.get_node_text(current_node:field("name")[1], 0)[1]
+      local class_name = vim.treesitter.get_node_text(current_node:field("name")[1], 0)[1]
       table.insert(chain, 1, class_name)
     elseif node_type == "function_definition" then
       -- For Python, function names are identifiers
-      local func_name = ts_utils.get_node_text(current_node:field("name")[1], 0)[1]
+      local func_name = vim.treesitter.get_node_text(current_node:field("name")[1], 0)[1]
       table.insert(chain, 1, func_name)
     end
     current_node = current_node:parent()
