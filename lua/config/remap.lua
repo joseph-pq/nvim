@@ -52,27 +52,27 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
 vim.keymap.set("n", "<leader>o", ":noh<CR>")
 
-local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank()",
-  group = yankGrp,
-})
+-- local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   command = "silent! lua vim.highlight.on_yank()",
+--   group = yankGrp,
+-- })
 
-local h1 = vim.api.nvim_create_augroup("HighlightHover", { clear = true })
-vim.api.nvim_create_autocmd("CursorHold", {
-  command = "silent! lua vim.lsp.buf.document_highlight()",
-  group = h1,
-})
-local h2 = vim.api.nvim_create_augroup("HighlightHoverI", { clear = true })
-vim.api.nvim_create_autocmd("CursorHoldI", {
-  command = "silent! lua vim.lsp.buf.document_highlight()",
-  group = h2,
-})
-local h3 = vim.api.nvim_create_augroup("ClearHighlight", { clear = true })
-vim.api.nvim_create_autocmd("CursorMoved", {
-  command = "silent! lua vim.lsp.buf.clear_references()",
-  group = h3,
-})
+-- local h1 = vim.api.nvim_create_augroup("HighlightHover", { clear = true })
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   command = "silent! lua vim.lsp.buf.document_highlight()",
+--   group = h1,
+-- })
+-- local h2 = vim.api.nvim_create_augroup("HighlightHoverI", { clear = true })
+-- vim.api.nvim_create_autocmd("CursorHoldI", {
+--   command = "silent! lua vim.lsp.buf.document_highlight()",
+--   group = h2,
+-- })
+-- local h3 = vim.api.nvim_create_augroup("ClearHighlight", { clear = true })
+-- vim.api.nvim_create_autocmd("CursorMoved", {
+--   command = "silent! lua vim.lsp.buf.clear_references()",
+--   group = h3,
+-- })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
