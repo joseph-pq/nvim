@@ -84,6 +84,10 @@ lspconfig["pyright"].setup({
   }
 })
 
+lspconfig["bashls"].setup({
+  filetypes = { "sh", "bash", "zsh" },
+})
+
 lspconfig["ts_ls"].setup({
   capabilities = capabilities,
   init_options = {
