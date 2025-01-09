@@ -152,10 +152,6 @@ return {
 			'stevearc/dressing.nvim', -- optional for vim.ui.select
 		},
 	},
-
-	-- latex packages
-	{ 'lervag/vimtex' },
-
 	-- python repl
 	{ 'Vigemus/iron.nvim' },
 
