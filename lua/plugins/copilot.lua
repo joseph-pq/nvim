@@ -1,6 +1,9 @@
 -- Copied from https://github.com/jellydn/lazy-nvim-ide/blob/5238b765d423a16098c23d7b0a581695ead54c93/lua/plugins/extras/copilot-chat-v2.lua
 return {
-	{ 'github/copilot.vim' },
+	{
+		'github/copilot.vim',
+		event = "VeryLazy",
+	},
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
