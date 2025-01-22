@@ -5,10 +5,10 @@ vim.opt.nu = true -- enable number
 vim.opt.relativenumber = true -- relative number
 
 -- tabs
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+-- vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
