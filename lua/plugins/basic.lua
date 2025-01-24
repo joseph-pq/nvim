@@ -139,8 +139,6 @@ return {
 			"nvim-lua/plenary.nvim"
 		}
 	},
-	-- d for gitemoji
-	{ 'olacin/telescope-gitmoji.nvim' },
 
 	{ 'nvimtools/none-ls.nvim' },
 
