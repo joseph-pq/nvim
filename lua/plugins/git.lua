@@ -1,7 +1,12 @@
 return {
     { 'rhysd/git-messenger.vim' },
     { 'lewis6991/gitsigns.nvim' },
-    { 'tpope/vim-fugitive' },
+    {
+	'tpope/vim-fugitive',
+	keys = {
+	    { "<leader>gs", vim.cmd.Git, desc="fugitive.vim" },
+	}
+    },
     {
 	'JosephPenaQuino/committer.nvim',
 	config = function()
