@@ -5,5 +5,6 @@ null_ls.setup({
 			extra_args = { '--python-executable', 'python' },
 		}),
 		null_ls.builtins.diagnostics.proselint,
+		null_ls.builtins.formatting.isort,
 	}
 })
