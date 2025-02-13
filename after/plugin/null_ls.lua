@@ -6,6 +6,5 @@ null_ls.setup({
 		}),
 		null_ls.builtins.diagnostics.proselint,
 		null_ls.builtins.formatting.isort,
-		null_ls.builtins.formatting.docformatter,
 	}
 })
