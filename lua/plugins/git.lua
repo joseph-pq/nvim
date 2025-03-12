@@ -91,7 +91,7 @@ return {
 	},
 	{ 'olacin/telescope-gitmoji.nvim' },
 	{
-		'JosephPenaQuino/committer.nvim',
+		'joseph-pq/committer.nvim',
 		config = function()
 			require("committer").setup()
 		end,

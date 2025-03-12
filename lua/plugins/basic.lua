@@ -83,7 +83,7 @@ return {
 	},
 
 	{ 'lukas-reineke/indent-blankline.nvim' }, -- Indent guides
-	{ 'tpope/vim-sleuth' },                 -- Automatically set indent settings
+	{ 'tpope/vim-sleuth' },                   -- Automatically set indent settings
 	{ 'tpope/vim-commentary' },
 	{ 'tpope/vim-surround' },
 
@@ -199,5 +199,11 @@ return {
 		opts = {
 			lang = "python3",
 		},
-	}
+	},
+	{
+		dir = "joseph-pq/markdown-import.nvim",
+		opts = {
+			mlflow_uri = "http://jupiter2.incor.usp.br:8080",
+		},
+	},
 }
