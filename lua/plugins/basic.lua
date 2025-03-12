@@ -201,7 +201,7 @@ return {
 		},
 	},
 	{
-		dir = "joseph-pq/markdown-import.nvim",
+		"joseph-pq/markdown-import.nvim",
 		opts = {
 			mlflow_uri = "http://jupiter2.incor.usp.br:8080",
 		},
