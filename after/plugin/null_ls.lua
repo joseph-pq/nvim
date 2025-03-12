@@ -16,7 +16,7 @@ null_ls.setup({
 			command = vim.fn.stdpath("data") .. "/mason/bin/mypy",
 		}),
 		-- null_ls.builtins.diagnostics.proselint,
-		null_ls.builtins.formatting.isort,
+		-- null_ls.builtins.formatting.isort,
 		null_ls.builtins.formatting.prettier,
 	}
 })

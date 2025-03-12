@@ -158,24 +158,6 @@ return {
 
 	{ 'preservim/vimux' },
 	{
-		'yetone/avante.nvim',
-		build = "make",
-		lazy = false,
-		version = false,
-		BUILD_FROM_SOURCE = true,
-		dependencies = {
-			'nvim-tree/nvim-web-devicons',
-			'stevearc/dressing.nvim',
-			'nvim-lua/plenary.nvim',
-			'MunifTanjim/nui.nvim',
-			'MeanderingProgrammer/render-markdown.nvim',
-		},
-		config = function()
-			require('avante.config')
-		end,
-		run = 'make', -- Optional, only if you want to  tiktoken_core to calculate tokens count
-	},
-	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
 	},
 	{

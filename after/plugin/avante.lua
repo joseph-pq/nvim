@@ -1,23 +1,23 @@
--- Function to check if a systemctl process is running
-function IsSystemctlProcessRunning(service_name)
-  -- Command to check the status of the service
-  local command = "systemctl is-active " .. service_name
+-- -- Function to check if a systemctl process is running
+-- function IsSystemctlProcessRunning(service_name)
+--   -- Command to check the status of the service
+--   local command = "systemctl is-active " .. service_name
 
-  -- Execute the command
-  local handle = io.popen(command)
-  local result = handle:read("*a")
-  handle:close()
+--   -- Execute the command
+--   local handle = io.popen(command)
+--   local result = handle:read("*a")
+--   handle:close()
 
-  -- Trim any leading or trailing whitespace
-  result = vim.trim(result)
+--   -- Trim any leading or trailing whitespace
+--   result = vim.trim(result)
 
-  -- Check if the service is active
-  if result == "active" then
-    return true
-  else
-    return false
-  end
-end
+--   -- Check if the service is active
+--   if result == "active" then
+--     return true
+--   else
+--     return false
+--   end
+-- end
 
 
 --if vim.loop.fs_stat("/usr/local/bin/ollama") ~= nil and vim.env.NVIM_LLM ~= nil and not IsSystemctlProcessRunning("ollama") then
