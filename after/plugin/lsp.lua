@@ -78,7 +78,7 @@ lspconfig["pyright"].setup({
       analysis = {
         -- diagnosticMode = "workspace",
         -- Ignore all files for analysis to exclusively use Ruff for linting
-        ignore = { '*' },
+        -- ignore = { '*' },
       },
     }
   }
