@@ -4,11 +4,11 @@ vim.g.mapleader = "\\"
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selected line down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selected line up
 
-vim.keymap.set("n", "J", "mzJ`z") -- delete the line below
-vim.keymap.set("n", "<C-d>", "<C-d>zz") -- scroll down but centered
-vim.keymap.set("n", "<C-u>", "<C-u>zz") -- scroll up but centered
-vim.keymap.set("n", "n", "nzzzv") -- Center when forward searching
-vim.keymap.set("n", "N", "Nzzzv") -- Center when backward searching
+vim.keymap.set("n", "J", "mzJ`z")            -- delete the line below
+vim.keymap.set("n", "<C-d>", "<C-d>zz")      -- scroll down but centered
+vim.keymap.set("n", "<C-u>", "<C-u>zz")      -- scroll up but centered
+vim.keymap.set("n", "n", "nzzzv")            -- Center when forward searching
+vim.keymap.set("n", "N", "Nzzzv")            -- Center when backward searching
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
@@ -75,19 +75,6 @@ vim.keymap.set("n", "<leader>o", ":noh<CR>")
 -- })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
+	pattern = { "*" },
+	command = [[%s/\s\+$//e]],
 })
-
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "tex" },
-	command = "lua TexSettings()",
-})
-function TexSettings()
-    -- vim.opt_local.textwidth = 0
-    -- vim.opt_local.wrapmargin = 0
-    vim.opt.wrap = true  -- wrap lines
-    vim.opt.linebreak = true  -- breaks by word rather than character
-    -- vim.opt.columns = 80
-end
