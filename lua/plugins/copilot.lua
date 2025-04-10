@@ -1,9 +1,17 @@
 -- Copied from https://github.com/jellydn/lazy-nvim-ide/blob/5238b765d423a16098c23d7b0a581695ead54c93/lua/plugins/extras/copilot-chat-v2.lua
 return {
 	{
-		'github/copilot.vim',
-		event = "VeryLazy",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({})
+		end,
 	},
+	-- {
+	-- 	'github/copilot.vim',
+	-- 	event = "VeryLazy",
+	-- },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -141,12 +149,12 @@ return {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			--- The below dependencies are optional,
-			"echasnovski/mini.pick",       -- for file_selector provider mini.pick
+			"echasnovski/mini.pick",      -- for file_selector provider mini.pick
 			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-			"hrsh7th/nvim-cmp",            -- autocompletion for avante commands and mentions
-			"ibhagwan/fzf-lua",            -- for file_selector provider fzf
+			"hrsh7th/nvim-cmp",           -- autocompletion for avante commands and mentions
+			"ibhagwan/fzf-lua",           -- for file_selector provider fzf
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua",      -- for providers='copilot'
+			"zbirenbaum/copilot.lua",     -- for providers='copilot'
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
