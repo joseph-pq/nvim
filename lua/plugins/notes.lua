@@ -20,6 +20,8 @@ return {
 	{
 		'MeanderingProgrammer/render-markdown.nvim',
 		-- enabled = false,
+		-- ft = { "markdown", "Avante" },
+		-- version ="v8.1.1",
 		config = function()
 			require('render-markdown').setup({
 				file_types = { "markdown", "Avante" },

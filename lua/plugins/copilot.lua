@@ -138,8 +138,26 @@ return {
 		event = "VeryLazy",
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		opts = {
-			provider = "copilot",
+			provider = "gemini",
+			cursor_applying_provider = 'groq',
+			-- gemini  = {
+			-- 	model = "gemini-2.5-pro-preview-03-25",
+			-- },
+			behaviour = {
+				enable_cursor_planning_mode = true,
+			},
+			vendors = {
+				groq = { -- define groq provider
+					__inherited_from = 'openai',
+					api_key_name = os.getenv('GROQ_API_KEY'),
+					endpoint = 'https://api.groq.com/openai/v1/',
+					model = 'llama-3.3-70b-versatile',
+					max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+				},
+			},
+
 		},
+
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = "make",
 		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
@@ -171,14 +189,10 @@ return {
 						use_absolute_path = true,
 					},
 				},
-			},
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				'MeanderingProgrammer/render-markdown.nvim',
-				opts = {
-					file_types = { "markdown", "Avante" },
+				keys = {
+					-- suggested keymap
+					{ "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
 				},
-				ft = { "markdown", "Avante" },
 			},
 		},
 	},
