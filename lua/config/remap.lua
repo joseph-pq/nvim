@@ -78,3 +78,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	pattern = { "*" },
 	command = [[%s/\s\+$//e]],
 })
+
+-- create a command to print the number of words in the current line
+vim.api.nvim_create_user_command("WordCount", function()
+	local line = vim.api.nvim_get_current_line()
+	local word_count = #vim.split(line, "%s+")
+	print("Word count: " .. word_count)
+end, {})
