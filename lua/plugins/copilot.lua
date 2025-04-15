@@ -148,13 +148,15 @@ return {
 		event = "VeryLazy",
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		opts = {
-			provider = "gemini",
-			cursor_applying_provider = 'groq',
-			-- gemini  = {
-			-- 	model = "gemini-2.5-pro-preview-03-25",
-			-- },
+			provider = "copilot",
+			auto_suggestions_provider = nil,
+			cursor_applying_provider = 'copilot',
 			behaviour = {
 				enable_cursor_planning_mode = true,
+			},
+			ollama = {
+				endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT") or "http://172.22.132.234:11435",
+				model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
 			},
 			vendors = {
 				groq = { -- define groq provider
@@ -164,7 +166,14 @@ return {
 					max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
 				},
 			},
-
+			rag_service = {
+				enabled = os.getenv("AVANTE_RAG_HOST_MOUNT") ~= nil, -- Enables the RAG service only if the environment variable exists
+				host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"), -- Host mount path for the rag service
+				provider = "ollama",                             -- The provider to use for RAG service (e.g. openai or ollama)
+				llm_model = os.getenv("AVANTE_OLLAMA_MODEL"),    -- The LLM model to use for RAG service
+				embed_model = "",                                -- The embedding model to use for RAG service
+				endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"),  -- The API endpoint for RAG service
+			},
 		},
 
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
