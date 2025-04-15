@@ -37,6 +37,6 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = "\\"
 
-vim.g.python3_host_prog = os.getenv("HOME") .. "/.pyenv/versions/nvim-venv/bin/python"
+vim.g.python3_host_prog = os.getenv("HOME") .. "/.config/nvim/.venv/bin/python"
 
 vim.opt.conceallevel = 1
