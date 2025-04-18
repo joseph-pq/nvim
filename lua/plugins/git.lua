@@ -87,7 +87,8 @@ return {
 		'tpope/vim-fugitive',
 		keys = {
 			{ "<leader>gs", vim.cmd.Git, desc = "fugitive.vim" },
-		}
+		},
+		cmd = { "Git" },
 	},
 	{ 'olacin/telescope-gitmoji.nvim' },
 	{
