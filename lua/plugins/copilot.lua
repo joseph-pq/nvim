@@ -40,7 +40,7 @@ return {
 		event = "VeryLazy",
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		opts = {
-			provider = "copilot",
+			provider = os.getenv("AVANTE_PROVIDER") or "copilot",
 			auto_suggestions_provider = nil,
 			cursor_applying_provider = 'copilot',
 			behaviour = {
