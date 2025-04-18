@@ -19,42 +19,39 @@ return {
 	},
 	{
 		'MeanderingProgrammer/render-markdown.nvim',
-		-- enabled = false,
-		-- ft = { "markdown", "Avante" },
-		-- version ="v8.1.1",
-		config = function()
-			require('render-markdown').setup({
-				file_types = { "markdown", "Avante" },
-				heading = {
-					backgrounds = {}
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		ft = { "markdown", "Avante" },
+		opts = {
+			file_types = { "markdown", "Avante" },
+			heading = {
+				backgrounds = {}
+			},
+			checkbox = {
+				enabled = true,
+				unchecked = {
+					-- Replaces '[ ]' of 'task_list_marker_unchecked'
+					icon = '󰄱 ',
+					-- Highlight for the unchecked icon
+					highlight = 'RenderMarkdownUnchecked',
+					-- Highlight for item associated with unchecked checkbox
+					scope_highlight = nil,
 				},
-				checkbox = {
-					enabled = true,
-					unchecked = {
-						-- Replaces '[ ]' of 'task_list_marker_unchecked'
-						icon = '󰄱 ',
-						-- Highlight for the unchecked icon
-						highlight = 'RenderMarkdownUnchecked',
-						-- Highlight for item associated with unchecked checkbox
-						scope_highlight = nil,
-					},
-					checked = {
-						-- Replaces '[x]' of 'task_list_marker_checked'
-						icon = '',
-						-- Highlight for the checked icon
-						highlight = 'RenderMarkdownChecked',
-						-- Highlight for item associated with checked checkbox
-						scope_highlight = nil,
-					},
-					custom = {
-						todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
-						in_progress = { raw = "[>]", rendered = "", hl_group = "ObsidianRightArrow" },
-						canceled = { raw = "[~]", rendered = "󰰱", hl_group = "ObsidianTilde" },
-						important = { raw = "[!]", rendered = "", hl_group = "ObsidianImportant" },
-					}
+				checked = {
+					-- Replaces '[x]' of 'task_list_marker_checked'
+					icon = '',
+					-- Highlight for the checked icon
+					highlight = 'RenderMarkdownChecked',
+					-- Highlight for item associated with checked checkbox
+					scope_highlight = nil,
 				},
-			})
-		end,
+				custom = {
+					todo = { raw = '[-]', rendered = '󰥔 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+					in_progress = { raw = "[>]", rendered = "", hl_group = "ObsidianRightArrow" },
+					canceled = { raw = "[~]", rendered = "󰰱", hl_group = "ObsidianTilde" },
+					important = { raw = "[!]", rendered = "", hl_group = "ObsidianImportant" },
+				}
+			},
+		},
 	},
 	{
 		"epwalsh/obsidian.nvim",
