@@ -66,9 +66,9 @@ return {
 				embed_model = "nomic-embed-text",                -- The embedding model to use for RAG service
 				endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"),  -- The API endpoint for RAG service
 			},
-			disabled_tools = {
-				"bash",
-			},
+			-- disabled_tools = {
+			-- 	"bash",
+			-- },
 			custom_tools = {
 				{
 					name = "execute_tmux_command", -- Unique name for the new tool
