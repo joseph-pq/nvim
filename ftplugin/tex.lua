@@ -7,4 +7,4 @@ vim.opt.linebreak = true   -- breaks by word rather than character
 vim.opt.wrap = true
 -- set max width to 80
 vim.opt.textwidth = 0
-vim.opt.columns=80
+-- vim.opt.columns=80
