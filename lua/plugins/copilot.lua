@@ -58,18 +58,27 @@ return {
 	},
 	{
 		"yetone/avante.nvim",
+		dev = os.getenv("NVIM_AVANTE_DEV") == "true",
 		event = "VeryLazy",
 		version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
 		config = function()
+			-- add keymap to <leader>an to run AvanteChatNew command
+			vim.keymap.set("n", "<leader>an", function()
+				require("avante.api").ask({ ask = false, new_chat = true })
+			end, { desc = "Avante: New Chat" })
 			require("avante").setup({
+				debug = os.getenv("NVIM_AVANTE_DEV") == "true",
 				provider = os.getenv("AVANTE_PROVIDER") or "copilot",
 				auto_suggestions_provider = nil,
 				cursor_applying_provider = 'copilot',
 				behaviour = {
 					enable_cursor_planning_mode = true,
 				},
+				bedrock = {
+					model = os.getenv("AVANTE_BEDROCK_MODEL") or "anthropic.claude-3-5-sonnet-20241022-v2:0",
+				},
 				ollama = {
-					endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT") or "http://172.22.132.234:11435",
+					endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT") or "http://localhost:11434",
 					model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
 				},
 				vendors = {
