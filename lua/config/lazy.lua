@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -26,6 +27,9 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+  },
+  dev = {
+    path = "~/projects/nvim-plugins"
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
