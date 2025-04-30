@@ -89,6 +89,17 @@ return {
 						__inherited_from = 'gemini',
 						model = "gemini-2.5-pro-preview-03-25"
 					},
+					gemini_litellm = {
+						endpoint = (os.getenv("LITELLM_HOST") or "") .. "/gemini/v1beta/models",
+						api_key_name = "LITELLM_KEY",
+					},
+					ollama_litellm = {
+						__inherited_from = 'openai',
+						endpoint = os.getenv("LITELLM_HOST"),
+						model = "qwen2-5",
+						max_completion_tokens = nil,
+						api_key_name = "LITELLM_KEY",
+					},
 					groq = { -- define groq provider
 						__inherited_from = 'openai',
 						api_key_name = "GROQ_API_KEY",
