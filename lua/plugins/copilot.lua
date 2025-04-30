@@ -70,7 +70,10 @@ return {
 				debug = os.getenv("NVIM_AVANTE_DEV") == "true",
 				provider = os.getenv("AVANTE_PROVIDER") or "copilot",
 				auto_suggestions_provider = nil,
-				cursor_applying_provider = 'copilot',
+				cursor_applying_provider = 'gemini_pro',
+				gemini = {
+					model = "gemini-2.5-flash-preview-04-17",
+				},
 				behaviour = {
 					enable_cursor_planning_mode = true,
 				},
@@ -82,6 +85,10 @@ return {
 					model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
 				},
 				vendors = {
+					gemini_pro = {
+						__inherited_from = 'gemini',
+						model = "gemini-2.5-pro-preview-03-25"
+					},
 					groq = { -- define groq provider
 						__inherited_from = 'openai',
 						api_key_name = "GROQ_API_KEY",
