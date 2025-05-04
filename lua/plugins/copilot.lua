@@ -85,6 +85,41 @@ return {
 					model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
 				},
 				vendors = {
+					["copilot:claude-3.5"] = {
+						__inherited_from = "copilot",
+						model = "claude-3.5-sonnet",
+						max_tokens = 65536,
+					},
+					["copilot:claude-3.7"] = {
+						__inherited_from = "copilot",
+						model = "claude-3.7-sonnet",
+						max_tokens = 65536,
+					},
+					["copilot:claude-3.7-thought"] = {
+						__inherited_from = "copilot",
+						model = "claude-3.7-sonnet-thought",
+						max_tokens = 65536,
+					},
+					["copilot:o4-mini"] = {
+						__inherited_from = "copilot",
+						model = "o4-mini",
+						max_tokens = 100000,
+					},
+					["copilot:gpt-4.1"] = {
+						__inherited_from = "copilot",
+						model = "gpt-4.1",
+						max_tokens = 32768,
+					},
+					["copilot:gemini-2.0"] = {
+						__inherited_from = "copilot",
+						model = "gemini-2.0-flash-001",
+						max_tokens = 8192,
+					},
+					["copilot:gemini-2.5"] = {
+						__inherited_from = "copilot",
+						model = "gemini-2.5-pro-preview-03-25",
+						max_tokens = 65536,
+					},
 					gemini_pro = {
 						__inherited_from = 'gemini',
 						model = "gemini-2.5-pro-preview-03-25"
