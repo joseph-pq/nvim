@@ -47,7 +47,7 @@ return {
 		-- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
 		config = function()
 			require("mcphub").setup({
-				auto_approve = false,
+				auto_approve = true,
 				extensions = {
 					avante = {
 						make_slash_commands = true,
@@ -144,7 +144,7 @@ return {
 					},
 				},
 				rag_service = {
-					enabled = os.getenv("AVANTE_RAG_HOST_MOUNT") ~= nil, -- Enables the RAG service only if the environment variable exists
+					enabled = os.getenv("AVANTE_RAG_HOST_MOUNT") ~= nil and os.getenv("AVANTE_RAG_HOST_MOUNT") ~= "", -- Enables the RAG service only if the environment variable exists and is not empty
 					host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"), -- Host mount path for the rag service
 					provider = "ollama",                            -- The provider to use for RAG service (e.g. openai or ollama)
 					llm_model = os.getenv("AVANTE_OLLAMA_MODEL"),   -- The LLM model to use for RAG service
