@@ -246,7 +246,7 @@ capabilities.textDocument.foldingRange = {
 }
 -- Forced to utf-16 because some servers by default uses utf-8 and others
 -- do not support utf-32. Thus, the common denominator is utf-16.
-capabilities.general.positionEncodings = {"utf-16"}
+capabilities.general.positionEncodings = { "utf-16" }
 capabilities.textDocument.semanticTokens.multilineTokenSupport = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 vim.lsp.config("*", {
