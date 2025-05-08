@@ -117,7 +117,7 @@ return {
 					},
 					["copilot:gemini-2.5"] = {
 						__inherited_from = "copilot",
-						model = "gemini-2.5-pro-preview-03-25",
+						model = "gemini-2.5-pro-preview-05-06",
 						max_tokens = 65536,
 					},
 					gemini_pro = {
