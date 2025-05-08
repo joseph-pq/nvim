@@ -308,10 +308,10 @@ vim.lsp.config["pyright"] = {
   root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
   filetypes = { "python" },
   settings = {
+    -- Doc of options:
+    -- - https://github.com/microsoft/pyright/blob/main/docs/settings.md
+    -- - https://microsoft.github.io/pyright/#/settings
     pyright = {
-      -- Doc of options:
-      -- - https://github.com/microsoft/pyright/blob/main/docs/settings.md
-      -- - https://microsoft.github.io/pyright/#/settings
       disableOrganizeImports = true,
       autoSearchPaths = true,
       autoImportCompletions = true,
@@ -319,7 +319,7 @@ vim.lsp.config["pyright"] = {
     },
     python = {
       analysis = {
-        ignore = { "*" },
+        -- ignore = { "*" },
       },
     },
   },
