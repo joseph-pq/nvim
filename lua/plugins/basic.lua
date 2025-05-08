@@ -88,30 +88,31 @@ return {
 	{ 'tpope/vim-surround' },
 
 	-- LSP
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		dependencies = {
-			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },
-			{ 'williamboman/mason.nvim' },
-			{ 'williamboman/mason-lspconfig.nvim' },
+	{ 'williamboman/mason.nvim' },
+	-- {
+	-- 	'VonHeikemen/lsp-zero.nvim',
+	-- 	dependencies = {
+	-- 		-- LSP Support
+	-- 		{ 'neovim/nvim-lspconfig' },
+	-- 		{ 'williamboman/mason.nvim' },
+	-- 		{ 'williamboman/mason-lspconfig.nvim' },
 
-			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' }, -- Autocompletion
-			{ 'hrsh7th/cmp-buffer' },
-			{ 'hrsh7th/cmp-path' },
-			{ 'saadparwaiz1/cmp_luasnip' },
-			{ 'hrsh7th/cmp-nvim-lsp' },
-			{ 'hrsh7th/cmp-nvim-lua' },
+	-- 		-- Autocompletion
+	-- 		{ 'hrsh7th/nvim-cmp' }, -- Autocompletion
+	-- 		{ 'hrsh7th/cmp-buffer' },
+	-- 		{ 'hrsh7th/cmp-path' },
+	-- 		{ 'saadparwaiz1/cmp_luasnip' },
+	-- 		{ 'hrsh7th/cmp-nvim-lsp' },
+	-- 		{ 'hrsh7th/cmp-nvim-lua' },
 
-			-- Snippets
-			{
-				'L3MON4D3/LuaSnip',
-				build = "make install_jsregexp",
-			},
-			{ 'rafamadriz/friendly-snippets' },
-		}
-	},
+	-- 		-- Snippets
+	-- 		{
+	-- 			'L3MON4D3/LuaSnip',
+	-- 			build = "make install_jsregexp",
+	-- 		},
+	-- 		{ 'rafamadriz/friendly-snippets' },
+	-- 	}
+	-- },
 	{ "folke/zen-mode.nvim" },
 
 	{ 'christoomey/vim-system-copy' },
