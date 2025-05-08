@@ -285,6 +285,11 @@ vim.lsp.config["ruff_lsp"] = {
   cmd = { "ruff", "server" },
   root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
   filetypes = { "python" },
+  init_options = {
+    settings = {
+      logFile = vim.fn.stdpath("state") .. "/ruff_lsp.log",
+    },
+  },
 }
 -- Ruff: disable hover to let Pyright handle it
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -303,8 +308,20 @@ vim.lsp.config["pyright"] = {
   root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
   filetypes = { "python" },
   settings = {
-    pyright = { disableOrganizeImports = true },
-    python = { analysis = {} },
+    pyright = {
+      -- Doc of options:
+      -- - https://github.com/microsoft/pyright/blob/main/docs/settings.md
+      -- - https://microsoft.github.io/pyright/#/settings
+      disableOrganizeImports = true,
+      autoSearchPaths = true,
+      autoImportCompletions = true,
+      useLibraryCodeForTypes = true,
+    },
+    python = {
+      analysis = {
+        ignore = { "*" },
+      },
+    },
   },
 }
 
