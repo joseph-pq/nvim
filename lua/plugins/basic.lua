@@ -187,6 +187,7 @@ return {
 	},
 	{
 		"joseph-pq/markdown-import.nvim",
+		dev = os.getenv("NVIM_MARKDOWN_IMPORT_DEV") == "true",
 		opts = {
 			mlflow_uri = "http://jupiter2.incor.usp.br:8080",
 		},
