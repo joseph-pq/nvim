@@ -27,24 +27,62 @@ return {
 	},
 
 	{
-		"hrsh7th/nvim-cmp",
-		-- load cmp on InsertEnter
-		event = "InsertEnter",
-		-- these dependencies will only be loaded when cmp loads
-		-- dependencies are always lazy-loaded unless specified otherwise
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
+		'saghen/blink.cmp',
+		-- optional: provides snippets for the snippet source
+		dependencies = { 'rafamadriz/friendly-snippets' },
+
+		-- use a release tag to download pre-built binaries
+		version = '1.*',
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = { preset = 'default' },
+
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = 'mono'
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = false } },
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { 'lsp', 'path', 'snippets', 'buffer' },
+			},
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" }
 		},
+		opts_extend = { "sources.default" }
 	},
 
 	-- if some code requires a module from an unloaded plugin, it will be automatically loaded.
 	-- So for api plugins like devicons, we can always set lazy=true
 	{
 		"nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup({ default = true })
-		end
+		opts = {
+			default = true,
+		},
 	},
 
 	-- you can use the VeryLazy event for things that can
@@ -88,7 +126,10 @@ return {
 	{ 'tpope/vim-surround' },
 
 	-- LSP
-	{ 'williamboman/mason.nvim' },
+	{
+		'williamboman/mason.nvim',
+		opts = {},
+	},
 	-- {
 	-- 	'VonHeikemen/lsp-zero.nvim',
 	-- 	dependencies = {
@@ -163,7 +204,7 @@ return {
 	},
 	{
 		'rcarriga/nvim-notify',
-		enabled=false,
+		enabled = false,
 		config = function()
 			vim.notify = require('notify')
 			require("notify").setup({
@@ -214,16 +255,16 @@ return {
 					override = {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+						-- ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 					},
 				},
 				-- you can enable a preset for easier configuration
 				presets = {
-					bottom_search = true,   -- use a classic bottom cmdline for search
-					command_palette = true, -- position the cmdline and popupmenu together
+					bottom_search = true,    -- use a classic bottom cmdline for search
+					command_palette = true,  -- position the cmdline and popupmenu together
 					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false,     -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false, -- add a border to hover docs and signature help
+					inc_rename = false,      -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false,  -- add a border to hover docs and signature help
 				},
 			})
 		end,

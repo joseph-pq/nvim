@@ -1,129 +1,27 @@
 -- Initially taken from https://github.com/Rishabh672003/Neovim/blob/main/lua%2Frj%2Flsp.lua
--- local lsp_zero = require('lsp-zero')
--- local lspconfig = require('lspconfig')
-
--- Setup mason
-require('mason').setup()
--- require('mason-lspconfig').setup({
---   ensure_installed = { 'rust_analyzer', 'pyright', 'ruff', 'texlab', 'ts_ls', 'lua_ls' },
--- })
-
--- Load snippets
--- require('luasnip.loaders.from_vscode').lazy_load()
-
--- Completion
--- local cmp = require('cmp')
--- local cmp_select = { behavior = cmp.SelectBehavior.Select }
--- local cmp_mappings = cmp.mapping.preset.insert({
---   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
---   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
---   ['<C-y>'] = cmp.mapping.confirm({ select = true }),
---   ['<C-Space>'] = cmp.mapping.complete(),
--- })
--- cmp.setup({
---   sources = {
---     { name = 'path' },
---     { name = 'nvim_lsp' },
---     { name = 'nvim_lua' },
---     { name = 'luasnip', keyword_length = 2 },
---     { name = 'buffer',  keyword_length = 3 },
---   },
---   -- formatting = lsp_zero.cmp_format({ details = false }),
---   mapping = cmp_mappings,
--- })
-
--- -- Capabilities
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- -- capabilities.textDocument.publishDiagnostics = {
--- --   tagSupport = { valueSet = { 2 } }
--- -- }
-
--- -- on_attach function
--- local function on_attach(client, bufnr)
---   local opts = { buffer = bufnr, remap = false }
---   local keymap = vim.keymap.set
-
---   keymap("n", "gd", vim.lsp.buf.definition, opts)
---   keymap("n", "K", vim.lsp.buf.hover, opts)
---   keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
---   keymap("n", "<leader>vd", vim.diagnostic.open_float, opts)
---   keymap("n", "]d", vim.diagnostic.goto_next, opts)
---   keymap("n", "[d", vim.diagnostic.goto_prev, opts)
---   keymap("n", "<leader>vca", vim.lsp.buf.code_action, opts)
---   keymap("n", "<leader>vrr", vim.lsp.buf.references, opts)
---   keymap("n", "<leader>vrn", vim.lsp.buf.rename, opts)
---   keymap("i", "<C-h>", vim.lsp.buf.signature_help, opts)
--- end
-
--- lsp_zero.on_attach(on_attach)
-
--- -- Server configurations
--- local servers = {
---   pyright = {
---     settings = {
---       pyright = { disableOrganizeImports = true },
---       python = { analysis = {} },
---     }
---   },
---   bashls = {
---     filetypes = { "sh", "bash", "zsh" },
---   },
---   ts_ls = {
---     init_options = {
---       preferences = {
---         disableSuggestions = true,
---       },
---     },
---   },
---   ruff = {},
---   lua_ls = {
---     settings = {
---       Lua = {
---         runtime = {
---           version = "LuaJIT",
---           special = { reload = "require" },
---         },
---         workspace = {
---           library = {
---             vim.fn.expand("$VIMRUNTIME/lua"),
---             vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
---             vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
---           },
---         },
---       },
---     }
---   },
--- }
-
--- -- Setup LSP servers
--- for name, opts in pairs(servers) do
---   opts.capabilities = capabilities
---   opts.on_attach = on_attach
---   lspconfig[name].setup(opts)
--- end
-
-local config = {
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = "",
+vim.diagnostic.config(
+  {
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      },
     },
-  },
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-  float = {
-    style = "minimal",
-    border = "single",
-    source = "always",
-    header = "",
-    prefix = "",
-    suffix = "",
-  },
-}
-vim.diagnostic.config(config)
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      style = "minimal",
+      border = "single",
+      -- source = "always",
+      header = "",
+      prefix = "",
+      suffix = "",
+    },
+  }
+)
 
 local icons = {
   Class = " ",
@@ -237,106 +135,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-
--- Setup LSP capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
-  dynamicRegistration = true,
-  lineFoldingOnly = true,
-}
--- Forced to utf-16 because some servers by default uses utf-8 and others
--- do not support utf-32. Thus, the common denominator is utf-16.
-capabilities.general.positionEncodings = { "utf-16" }
-capabilities.textDocument.semanticTokens.multilineTokenSupport = true
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 vim.lsp.config("*", {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
-    if ok then
-      diag.populate_workspace_diagnostics(client, bufnr)
-    end
-  end,
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
+-- -- Setup LSP capabilities
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.foldingRange = {
+--   dynamicRegistration = true,
+--   lineFoldingOnly = true,
+-- }
+-- -- Forced to utf-16 because some servers by default uses utf-8 and others
+-- -- do not support utf-32. Thus, the common denominator is utf-16.
+-- capabilities.general.positionEncodings = { "utf-16" }
+-- capabilities.textDocument.semanticTokens.multilineTokenSupport = true
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- vim.lsp.config("*", {
+--   capabilities = capabilities,
+--   on_attach = function(client, bufnr)
+--     local ok, diag = pcall(require, "rj.extras.workspace-diagnostic")
+--     if ok then
+--       diag.populate_workspace_diagnostics(client, bufnr)
+--     end
+--   end,
+-- })
 
-vim.lsp.config["lua_ls"] = {
-  cmd = { "lua-language-server" },
-  filetypes = { "lua" },
-  root_markers = { ".luarc.json", ".git", vim.uv.cwd() },
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        special = { reload = "require" },
-      },
-      workspace = {
-        library = {
-          vim.fn.expand("$VIMRUNTIME/lua"),
-          vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-          vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
-        },
-      },
-    },
-  },
-}
-
-vim.lsp.config["ruff_lsp"] = {
-  cmd = { "ruff", "server" },
-  root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
-  filetypes = { "python" },
-  init_options = {
-    settings = {
-      logFile = vim.fn.stdpath("state") .. "/ruff_lsp.log",
-    },
-  },
-}
--- Ruff: disable hover to let Pyright handle it
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.name == 'ruff' then
-      client.server_capabilities.hoverProvider = false
-    end
-  end,
-  desc = 'LSP: Disable hover capability from Ruff',
-})
-
-vim.lsp.config["pyright"] = {
-  cmd = { "pyright-langserver", "--stdio" },
-  root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
-  filetypes = { "python" },
-  settings = {
-    -- Doc of options:
-    -- - https://github.com/microsoft/pyright/blob/main/docs/settings.md
-    -- - https://microsoft.github.io/pyright/#/settings
-    pyright = {
-      disableOrganizeImports = true,
-      autoSearchPaths = true,
-      autoImportCompletions = true,
-      useLibraryCodeForTypes = true,
-    },
-    python = {
-      analysis = {
-        -- ignore = { "*" },
-      },
-    },
-  },
-}
-
--- Enable features based on client capabilities
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client ~= nil and client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-  end,
-})
+-- -- Enable features based on client capabilities
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(ev)
+--     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--     if client ~= nil and client:supports_method('textDocument/completion') then
+--       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--     end
+--   end,
+-- })
 
 -- Add noselect to completeopt, otherwise autocompletion is annoying
-vim.cmd("set completeopt+=noselect")
+-- vim.cmd("set completeopt+=noselect")
 
 vim.lsp.enable({ 'lua_ls' })
 vim.lsp.enable({ 'pyright' })
