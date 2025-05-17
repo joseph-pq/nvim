@@ -12,4 +12,4 @@ end
 --     vim.cmd('hi NonText ctermbg=NONE guibg=NONE')
 -- end
 
-ColorMyPencils("catppuccin-mocha")
+ColorMyPencils("tokyonight-night")
