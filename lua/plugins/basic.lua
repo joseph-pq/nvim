@@ -1,11 +1,10 @@
 return {
-
 	-- I have a separate config.mappings file where I require which-key.
 	-- With lazy the plugin will be automatically loaded when it is required somewhere
-	{ "folke/which-key.nvim",   lazy = true },
-
+	{ "folke/which-key.nvim", lazy = true },
 	{
 		"nvim-neorg/neorg",
+		enabled = false,
 		-- lazy-load on filetype
 		ft = "norg",
 		-- options for neorg. This will automatically call `require("neorg").setup(opts)`
@@ -15,7 +14,6 @@ return {
 			},
 		},
 	},
-
 	{
 		"dstein64/vim-startuptime",
 		-- lazy-load on a command
@@ -25,14 +23,13 @@ return {
 			vim.g.startuptime_tries = 10
 		end,
 	},
-
 	{
-		'saghen/blink.cmp',
+		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
-		dependencies = { 'rafamadriz/friendly-snippets' },
+		dependencies = { "rafamadriz/friendly-snippets" },
 
 		-- use a release tag to download pre-built binaries
-		version = '1.*',
+		version = "1.*",
 
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
@@ -49,12 +46,12 @@ return {
 			-- C-k: Toggle signature help (if signature.enabled = true)
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			keymap = { preset = 'default' },
+			keymap = { preset = "default" },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
-				nerd_font_variant = 'mono'
+				nerd_font_variant = "mono",
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
@@ -63,7 +60,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -71,23 +68,23 @@ return {
 			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
 			--
 			-- See the fuzzy documentation for more information
-			fuzzy = { implementation = "prefer_rust_with_warning" }
+			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
-		opts_extend = { "sources.default" }
+		opts_extend = { "sources.default" },
 	},
-
 	-- if some code requires a module from an unloaded plugin, it will be automatically loaded.
 	-- So for api plugins like devicons, we can always set lazy=true
 	{
-		'echasnovski/mini.icons',
-		version = '*',
+		"echasnovski/mini.icons",
+		version = "*",
 		opts = {},
 	},
-
 	-- you can use the VeryLazy event for things that can
 	-- load later and are not important for the initial UI
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
-
+	{
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+	},
 	{
 		"Wansmer/treesj",
 		keys = {
@@ -105,60 +102,42 @@ return {
 	-- local plugins can also be configured with the dev option.
 	-- With the dev option, you can easily switch between the local and installed version of a plugin
 	-- Highlight, edit, and navigate code
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
-		'nvim-treesitter/nvim-treesitter-textobjects',
-		dependencies = { 'nvim-treesitter' }
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter" },
 	},
 	--- This is used for my own plugins
-	{ 'nvim-treesitter/playground' },
-	{ 'mbbill/undotree' },
+	{
+		"nvim-treesitter/playground",
+	},
+	{
+		"mbbill/undotree",
+	},
 
 	{
-		'nvim-lualine/lualine.nvim', -- Fancier status line
+		"nvim-lualine/lualine.nvim", -- Fancier status line
 		-- dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
 
-	{ 'lukas-reineke/indent-blankline.nvim' }, -- Indent guides
-	{ 'tpope/vim-sleuth' },                   -- Automatically set indent settings
-	{ 'tpope/vim-commentary' },
-	{ 'tpope/vim-surround' },
+	{ "lukas-reineke/indent-blankline.nvim" }, -- Indent guides
+	{ "tpope/vim-sleuth" }, -- Automatically set indent settings
+	{ "tpope/vim-commentary" },
+	{ "tpope/vim-surround" },
 
 	-- LSP
 	{
-		'williamboman/mason.nvim',
+		"williamboman/mason.nvim",
 		opts = {},
 	},
-	-- {
-	-- 	'VonHeikemen/lsp-zero.nvim',
-	-- 	dependencies = {
-	-- 		-- LSP Support
-	-- 		{ 'neovim/nvim-lspconfig' },
-	-- 		{ 'williamboman/mason.nvim' },
-	-- 		{ 'williamboman/mason-lspconfig.nvim' },
-
-	-- 		-- Autocompletion
-	-- 		{ 'hrsh7th/nvim-cmp' }, -- Autocompletion
-	-- 		{ 'hrsh7th/cmp-buffer' },
-	-- 		{ 'hrsh7th/cmp-path' },
-	-- 		{ 'saadparwaiz1/cmp_luasnip' },
-	-- 		{ 'hrsh7th/cmp-nvim-lsp' },
-	-- 		{ 'hrsh7th/cmp-nvim-lua' },
-
-	-- 		-- Snippets
-	-- 		{
-	-- 			'L3MON4D3/LuaSnip',
-	-- 			build = "make install_jsregexp",
-	-- 		},
-	-- 		{ 'rafamadriz/friendly-snippets' },
-	-- 	}
-	-- },
 	{ "folke/zen-mode.nvim" },
-
-	{ 'christoomey/vim-system-copy' },
-	{ 'vim-scripts/argtextobj.vim' },
-	{ 'j-hui/fidget.nvim' },
-	{ 'neomake/neomake' },
+	{ "christoomey/vim-system-copy" },
+	{ "vim-scripts/argtextobj.vim" },
+	{ "j-hui/fidget.nvim" },
+	{ "neomake/neomake" },
 	-- tests
 	{
 		"nvim-neotest/neotest",
@@ -167,45 +146,48 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-python",
-		}
+		},
 	},
 	-- misc
 	{ -- execute some things
-		'stevearc/overseer.nvim',
-		config = function() require('overseer').setup() end
+		"stevearc/overseer.nvim",
+		config = function()
+			require("overseer").setup()
+		end,
 	},
 	{
 		"folke/todo-comments.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim"
-		}
+			"nvim-lua/plenary.nvim",
+		},
 	},
-
-	{ 'nvimtools/none-ls.nvim' },
-
+	{ "nvimtools/none-ls.nvim" },
 	-- flutter
 	{
-		'akinsho/flutter-tools.nvim',
+		"akinsho/flutter-tools.nvim",
 		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'stevearc/dressing.nvim', -- optional for vim.ui.select
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- optional for vim.ui.select
 		},
 	},
 	-- python repl
-	{ 'Vigemus/iron.nvim' },
-
-	-- datascience
-	{ 'jpalardy/vim-slime' },
-
-	{ 'preservim/vimux' },
 	{
-		'JoosepAlviste/nvim-ts-context-commentstring',
+		"Vigemus/iron.nvim",
+	},
+	-- datascience
+	{
+		"jpalardy/vim-slime",
 	},
 	{
-		'rcarriga/nvim-notify',
+		"preservim/vimux",
+	},
+		"JoosepAlviste/nvim-ts-context-commentstring",
+	},
+	{
+		"rcarriga/nvim-notify",
 		enabled = false,
 		config = function()
-			vim.notify = require('notify')
+			vim.notify = require("notify")
 			require("notify").setup({
 				background_colour = "#000000",
 				merge_duplicates = true,
@@ -228,17 +210,12 @@ return {
 	{
 		"joseph-pq/markdown-import.nvim",
 		dev = os.getenv("NVIM_MARKDOWN_IMPORT_DEV") == "true",
-		opts = {
-			mlflow_uri = "http://jupiter2.incor.usp.br:8080",
-		},
+		opts = {},
 	},
 	-- lazy.nvim
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
@@ -247,26 +224,24 @@ return {
 			--   If not available, we use `mini` as the fallback
 			-- "rcarriga/nvim-notify",
 		},
-		config = function()
-			require("noice").setup({
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						-- ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-					},
+		opts = {
+			lsp = {
+				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					-- ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = true,    -- use a classic bottom cmdline for search
-					command_palette = true,  -- position the cmdline and popupmenu together
-					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false,      -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false,  -- add a border to hover docs and signature help
-				},
-			})
-		end,
+			},
+			-- you can enable a preset for easier configuration
+			presets = {
+				bottom_search = true, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
+				long_message_to_split = true, -- long messages will be sent to a split
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = false, -- add a border to hover docs and signature help
+			},
+		},
 	},
 	{
 		"folke/snacks.nvim",
@@ -283,10 +258,10 @@ return {
 			indent = { enabled = true },
 			input = { enabled = true },
 			picker = { enabled = true },
-			notifier = { enabled = true },
+			notifier = { enabled = false },
 			quickfile = { enabled = true },
 			scope = { enabled = true },
-			scroll = { enabled = true },
+			scroll = { enabled = false },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
