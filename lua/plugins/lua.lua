@@ -10,6 +10,7 @@ return {
         { path = "luvit-meta/library",                      words = { "vim%.uv" } },
         { path = "~/projects/nvim-plugins/avante.nvim/lua", words = { "avante" } },
         { path = vim.fn.stdpath("data") .. "/lazy/plenary.nvim/lua" },
+        { path = vim.fn.stdpath("data") .. "/lazy/snacks.nvim/lua" },
       },
     },
     dependencies = {
