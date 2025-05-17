@@ -4,20 +4,20 @@
 
 ---@type vim.lsp.Config
 return {
-	cmd = { "pyright-langserver", "--stdio" },
-	root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
-	filetypes = { "python" },
-	settings = {
-		pyright = {
-			disableOrganizeImports = true,
-			autoSearchPaths = true,
-			autoImportCompletions = true,
-			useLibraryCodeForTypes = true,
-		},
-		python = {
-			analysis = {
-				-- ignore = { "*" },
-			},
-		},
-	},
+  cmd = { "pyright-langserver", "--stdio" },
+  root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
+  filetypes = { "python" },
+  settings = {
+    pyright = {
+      disableOrganizeImports = true,
+      autoSearchPaths = true,
+      autoImportCompletions = true,
+      useLibraryCodeForTypes = true,
+    },
+    python = {
+      analysis = {
+        -- ignore = { "*" },
+      },
+    },
+  },
 }

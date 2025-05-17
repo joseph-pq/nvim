@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("gd", require("snacks").picker.lsp_definitions, "[G]oto [D]efinition")
     map("grr", require("snacks").picker.lsp_references, "[G]oto [R]eferences")
---    keymap("n", "grl", vim.diagnostic.open_float, opt("Open diagnostic in float"))
+    --    keymap("n", "grl", vim.diagnostic.open_float, opt("Open diagnostic in float"))
     map("grl", vim.diagnostic.open_float, "[G]oto Diagnostic")
     map("gI", require("snacks").picker.lsp_implementations, "[G]oto [I]mplementation")
     -- map("<leader>D", require("snacks").picker.lsp_type_definitions, "Type [D]efinition")
@@ -106,7 +106,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --for i, kind in ipairs(completion_kinds) do
 --  completion_kinds[i] = icons[kind] and icons[kind] .. kind or kind
 --end
-
 
 --vim.api.nvim_create_autocmd("LspAttach", {
 --  group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
@@ -228,6 +227,6 @@ vim.lsp.config("*", {
 -- Add noselect to completeopt, otherwise autocompletion is annoying
 -- vim.cmd("set completeopt+=noselect")
 
-vim.lsp.enable({ 'lua_ls' })
-vim.lsp.enable({ 'pyright' })
-vim.lsp.enable({ 'ruff_lsp' })
+vim.lsp.enable({ "lua_ls" })
+vim.lsp.enable({ "pyright" })
+vim.lsp.enable({ "ruff_lsp" })

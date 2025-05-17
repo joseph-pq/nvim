@@ -1,5 +1,5 @@
 require("neotest").setup({
-	adapters = {
-		require("neotest-python"),
-	},
+  adapters = {
+    require("neotest-python"),
+  },
 })
