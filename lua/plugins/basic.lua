@@ -161,7 +161,6 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 	},
-	{ "nvimtools/none-ls.nvim" },
 	-- flutter
 	{
 		"akinsho/flutter-tools.nvim",
