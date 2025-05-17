@@ -181,6 +181,7 @@ return {
 	{
 		"preservim/vimux",
 	},
+	{
 		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
 	{
