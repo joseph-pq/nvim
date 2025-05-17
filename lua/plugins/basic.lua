@@ -79,10 +79,9 @@ return {
 	-- if some code requires a module from an unloaded plugin, it will be automatically loaded.
 	-- So for api plugins like devicons, we can always set lazy=true
 	{
-		"nvim-tree/nvim-web-devicons",
-		opts = {
-			default = true,
-		},
+		'echasnovski/mini.icons',
+		version = '*',
+		opts = {},
 	},
 
 	-- you can use the VeryLazy event for things that can
@@ -117,7 +116,7 @@ return {
 
 	{
 		'nvim-lualine/lualine.nvim', -- Fancier status line
-		dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+		-- dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
 	},
 
 	{ 'lukas-reineke/indent-blankline.nvim' }, -- Indent guides
