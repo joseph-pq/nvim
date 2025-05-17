@@ -4,33 +4,6 @@ return {
 		'nvim-telescope/telescope.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	-- telescope-file-browser.nvim --------------------------------------------
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-		config = function()
-			local fb_actions = require "telescope._extensions.file_browser.actions"
-			require("telescope").setup({
-				hidden = { file_browser = false },
-				extensions={
-					file_browser = {
-						no_ignore = true,
-						respect_gitignore = false,
-						mappings = {
-							["n"] = {
-								["-"] = fb_actions.goto_parent_dir,
-								["%"] = fb_actions.create,
-							},
-						},
-					}
-				},
-			})
-			-- To get telescope-file-browser loaded and working with telescope,
-			-- you need to call load_extension, somewhere after setup function:
-			require("telescope").load_extension "file_browser"
-			vim.keymap.set("n", "<leader>pv", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
-		end,
-	},
 	{
 		"3rd/image.nvim",
 		enabled = false,
@@ -63,12 +36,28 @@ return {
 				max_height = nil,
 				max_width_window_percentage = nil,
 				max_height_window_percentage = 50,
-				window_overlap_clear_enabled = false,                                   -- toggles images when windows are overlapped
+				window_overlap_clear_enabled = false,                                           -- toggles images when windows are overlapped
 				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-				editor_only_render_when_focused = false,                                -- auto show/hide images when the editor gains/looses focus
-				tmux_show_only_in_active_window = false,                                -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+				editor_only_render_when_focused = false,                                        -- auto show/hide images when the editor gains/looses focus
+				tmux_show_only_in_active_window = false,                                        -- auto show/hide images in the correct Tmux window (needs visual-activity off)
 				hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
 			}
 		end
+	},
+	{
+		'stevearc/oil.nvim',
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {
+			delete_to_trash = true,
+		},
+		keys = {
+			{ "<leader>pv", "<cmd>Oil<CR>", desc = "Open parent directory" },
+		},
+		-- Optional dependencies
+		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
 	}
 }
