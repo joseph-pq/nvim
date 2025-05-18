@@ -117,12 +117,6 @@ return {
   {
     "mbbill/undotree",
   },
-
-  {
-    "nvim-lualine/lualine.nvim", -- Fancier status line
-    -- dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
-  },
-
   { "lukas-reineke/indent-blankline.nvim" }, -- Indent guides
   { "tpope/vim-sleuth" }, -- Automatically set indent settings
   { "tpope/vim-commentary" },
