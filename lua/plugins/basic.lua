@@ -260,4 +260,9 @@ return {
       words = { enabled = true },
     },
   },
+  {
+    "vyfor/cord.nvim",
+    build = ":Cord update",
+    opts = {},
+  },
 }
