@@ -261,6 +261,14 @@ return {
     },
   },
   {
+    "pwntester/octo.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    opts = {},
+  },
+  {
     "vyfor/cord.nvim",
     build = ":Cord update",
     opts = {},
