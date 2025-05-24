@@ -22,6 +22,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
     ft = { "markdown", "Avante" },
     opts = {
+      html = { enabled = false },
+      latex = { enabled = false },
       file_types = { "markdown", "Avante" },
       heading = {
         backgrounds = {},
