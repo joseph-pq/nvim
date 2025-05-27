@@ -13,6 +13,7 @@ return {
           },
         },
         filetypes = {
+          markdown = true,
           gitcommit = true,
         },
       })
@@ -277,8 +278,12 @@ return {
             drag_and_drop = {
               insert_mode = true,
             },
-            -- required for Windows users
-            use_absolute_path = true,
+            use_absolute_path = false,
+          },
+          filetypes = {
+            markdown = {
+              template = "<center><img src=\"$FILE_PATH\" alt=\"$CURSOR\"/></center>",
+            },
           },
         },
         keys = {
