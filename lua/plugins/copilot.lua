@@ -72,54 +72,68 @@ return {
         provider = os.getenv("AVANTE_PROVIDER") or "copilot",
         auto_suggestions_provider = nil,
         cursor_applying_provider = "gemini_pro",
-        gemini = {
-          model = "gemini-2.5-flash-preview-04-17",
-        },
-        behaviour = {
-          enable_cursor_planning_mode = true,
-        },
-        bedrock = {
-          model = os.getenv("AVANTE_BEDROCK_MODEL") or "anthropic.claude-3-5-sonnet-20241022-v2:0",
-        },
-        ollama = {
-          endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT") or "http://localhost:11434",
-          model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
-        },
-        vendors = {
+        providers = {
+          gemini = {
+            model = "gemini-2.5-flash-preview-04-17",
+          },
+          behaviour = {
+            enable_cursor_planning_mode = true,
+          },
+          bedrock = {
+            model = os.getenv("AVANTE_BEDROCK_MODEL") or "anthropic.claude-3-5-sonnet-20241022-v2:0",
+          },
+          ollama = {
+            endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT") or "http://localhost:11434",
+            model = os.getenv("AVANTE_OLLAMA_MODEL") or "qwen2.5-coder:3b",
+          },
           ["copilot:claude-3.5"] = {
             __inherited_from = "copilot",
             model = "claude-3.5-sonnet",
-            max_tokens = 65536,
+            extra_request_body = {
+              max_tokens = 65536,
+            },
           },
           ["copilot:claude-3.7"] = {
             __inherited_from = "copilot",
             model = "claude-3.7-sonnet",
-            max_tokens = 65536,
+            extra_request_body = {
+              max_tokens = 65536,
+            },
           },
           ["copilot:claude-3.7-thought"] = {
             __inherited_from = "copilot",
             model = "claude-3.7-sonnet-thought",
-            max_tokens = 65536,
+            extra_request_body = {
+              max_tokens = 65536,
+            },
           },
           ["copilot:o4-mini"] = {
             __inherited_from = "copilot",
             model = "o4-mini",
-            max_tokens = 100000,
+            extra_request_body = {
+              max_tokens = 100000,
+            },
           },
           ["copilot:gpt-4.1"] = {
             __inherited_from = "copilot",
             model = "gpt-4.1",
-            max_tokens = 32768,
+            extra_request_body = {
+              max_tokens = 32768,
+            },
           },
           ["copilot:gemini-2.0"] = {
             __inherited_from = "copilot",
             model = "gemini-2.0-flash-001",
-            max_tokens = 8192,
+            extra_request_body = {
+              max_tokens = 8192,
+            },
           },
           ["copilot:gemini-2.5"] = {
             __inherited_from = "copilot",
             model = "gemini-2.5-pro-preview-05-06",
-            max_tokens = 65536,
+            extra_request_body = {
+              max_tokens = 65536,
+            },
           },
           gemini_pro = {
             __inherited_from = "gemini",
@@ -141,7 +155,9 @@ return {
             api_key_name = "GROQ_API_KEY",
             endpoint = "https://api.groq.com/openai/v1/",
             model = "llama-3.3-70b-versatile",
-            max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+            extra_request_body = {
+              max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+            },
           },
         },
         rag_service = {
