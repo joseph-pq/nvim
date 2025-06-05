@@ -231,6 +231,7 @@ return {
   },
   {
     "ravitemer/mcphub.nvim",
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
     },
@@ -269,12 +270,12 @@ return {
       behaviour = {
         enable_cursor_planning_mode = true,
       },
-      cursor_applying_provider = "gemini_pro",
+      -- cursor_applying_provider = "gemini_pro",
       providers = avante_providers, -- Providers configuration
       rag_service = avante_rag_service, -- RAG service configuration
-      disabled_tools = avante_disabled_tools,
-      system_prompt = avante_system_prompt,
-      custom_tools = avante_custom_tools,
+      -- disabled_tools = avante_disabled_tools,
+      -- system_prompt = avante_system_prompt,
+      -- custom_tools = avante_custom_tools,
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
