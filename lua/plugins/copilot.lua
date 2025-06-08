@@ -86,6 +86,7 @@ local avante_providers = {
     model = "gemini-2.5-pro-preview-03-25",
   },
   gemini_litellm = {
+    __inherited_from = "gemini",
     endpoint = (os.getenv("LITELLM_HOST") or "") .. "/gemini/v1beta/models",
     api_key_name = "LITELLM_KEY",
   },
