@@ -252,19 +252,22 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    enabled=false,
     opts = {
       strategies = {
         chat = {
-          adapter = {
-            name = "copilot",
-            model = "claude-sonnet-4",
-          },
+          adapter = "copilot",
+          -- adapter = {
+          --   name = "copilot",
+          --   -- model = "claude-sonnet-3.7",
+          -- },
         },
         inline = {
-          adapter = {
-            name = "copilot",
-            model = "claude-sonnet-4",
-          },
+          adapter = "copilot",
+          -- adapter = {
+          --   name = "copilot",
+          --   -- model = "claude-sonnet-3-7",
+          -- },
         },
       },
     },
@@ -276,7 +279,7 @@ return {
   {
     "yetone/avante.nvim",
     dev = os.getenv("NVIM_AVANTE_DEV") == "true",
-    enable = false,
+    -- enable = false,
     event = "VeryLazy",
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
     key = {
