@@ -13,6 +13,14 @@ require("nvim-treesitter.configs").setup({
     "latex",
     "markdown",
     "http",
+    "html",
+    "css",
+    "norg",
+    "scss",
+    "svelte",
+    "tsx",
+    "typst",
+    "vue",
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
