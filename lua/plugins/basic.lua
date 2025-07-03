@@ -143,11 +143,10 @@ return {
     },
   },
   -- misc
-  { -- execute some things
+  { -- execute in a background
     "stevearc/overseer.nvim",
-    config = function()
-      require("overseer").setup()
-    end,
+    enabled = false,
+    opts = {},
   },
   {
     "folke/todo-comments.nvim",
