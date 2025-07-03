@@ -77,7 +77,10 @@ return {
   {
     "echasnovski/mini.icons",
     version = "*",
-    opts = {},
+    config = function()
+      require("mini.icons").setup()
+      MiniIcons.mock_nvim_web_devicons()
+    end,
   },
   -- you can use the VeryLazy event for things that can
   -- load later and are not important for the initial UI
