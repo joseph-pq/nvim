@@ -209,6 +209,7 @@ return {
         filetypes = {
           markdown = true,
           gitcommit = true,
+          tex = false,
         },
       })
     end,
