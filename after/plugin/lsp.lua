@@ -235,3 +235,5 @@ vim.lsp.config("*", {
 vim.lsp.enable({ "lua_ls" })
 vim.lsp.enable({ "pyright" })
 vim.lsp.enable({ "ruff_lsp" })
+vim.lsp.enable({ "eslint_lsp" })
+vim.lsp.enable({ "typescript_language_server" })
