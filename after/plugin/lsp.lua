@@ -233,7 +233,8 @@ vim.lsp.config("*", {
 -- vim.cmd("set completeopt+=noselect")
 
 vim.lsp.enable({ "lua_ls" })
-vim.lsp.enable({ "pyright" })
+-- vim.lsp.enable({ "pyright" })
+vim.lsp.enable({ "ty" })
 vim.lsp.enable({ "ruff_lsp" })
 vim.lsp.enable({ "eslint_lsp" })
 vim.lsp.enable({ "typescript_language_server" })
