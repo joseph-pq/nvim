@@ -13,14 +13,38 @@ local avante_disabled_tools = {
 
 local avante_rag_service = {
   enabled = os.getenv("AVANTE_RAG_HOST_MOUNT") ~= nil and os.getenv("AVANTE_RAG_HOST_MOUNT") ~= "", -- Enables the RAG service only if the environment variable exists and is not empty
-  host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"), -- Host mount path for the rag service
-  provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
-  llm_model = os.getenv("AVANTE_OLLAMA_MODEL"), -- The LLM model to use for RAG service
-  embed_model = "nomic-embed-text", -- The embedding model to use for RAG service
-  endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"), -- The API endpoint for RAG service
+  host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"),                                                  -- Host mount path for the rag service
+  provider = "ollama",                                                                              -- The provider to use for RAG service (e.g. openai or ollama)
+  llm_model = os.getenv("AVANTE_OLLAMA_MODEL"),                                                     -- The LLM model to use for RAG service
+  embed_model = "nomic-embed-text",                                                                 -- The embedding model to use for RAG service
+  endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"),                                                   -- The API endpoint for RAG service
 }
 
 local avante_providers = {
+  avante_commands = {
+    name = "avante_commands",
+    module = "blink.compat.source",
+    score_offset = 90, -- show at a higher priority than lsp
+    opts = {},
+  },
+  avante_files = {
+    name = "avante_files",
+    module = "blink.compat.source",
+    score_offset = 100, -- show at a higher priority than lsp
+    opts = {},
+  },
+  avante_mentions = {
+    name = "avante_mentions",
+    module = "blink.compat.source",
+    score_offset = 1000, -- show at a higher priority than lsp
+    opts = {},
+  },
+  avante_shortcuts = {
+    name = "avante_shortcuts",
+    module = "blink.compat.source",
+    score_offset = 1000, -- show at a higher priority than lsp
+    opts = {},
+  },
   gemini = {
     -- model = "gemini-2.5-flash-preview-04-17",
     model = "gemini-2.5-flash-preview-05-20",
@@ -109,10 +133,10 @@ local avante_providers = {
 }
 
 local tmux_tool = {
-  name = "execute_tmux_command", -- Unique name for the new tool
+  name = "execute_tmux_command",              -- Unique name for the new tool
   description = "Execute a bash command in and retrieve results",
   command = "tmux send-keys -t $TMUX_WINDOW", -- Base command to send keys to tmux
-  param = { -- Input parameters
+  param = {                                   -- Input parameters
     type = "table",
     fields = {
       {
@@ -131,7 +155,8 @@ local tmux_tool = {
     },
     {
       name = "error",
-      description = "0 if successful. If the value is between 1 and 255, it indicates a bash error. A value of 256 means the command did not finish. Otherwise, it is the error message.",
+      description =
+      "0 if successful. If the value is between 1 and 255, it indicates a bash error. A value of 256 means the command did not finish. Otherwise, it is the error message.",
       type = "string",
       optional = true,
     },
@@ -253,7 +278,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    enabled=false,
+    enabled = false,
     opts = {
       strategies = {
         chat = {
@@ -293,14 +318,16 @@ return {
       },
     },
     opts = {
+      instructions_file = "avante.md",
       debug = os.getenv("NVIM_AVANTE_DEV") == "true",
       provider = os.getenv("AVANTE_PROVIDER") or "copilot",
       auto_suggestions_provider = nil,
+      mode = "agentic",
       behaviour = {
         enable_cursor_planning_mode = true,
       },
       -- cursor_applying_provider = "gemini_pro",
-      providers = avante_providers, -- Providers configuration
+      providers = avante_providers,     -- Providers configuration
       rag_service = avante_rag_service, -- RAG service configuration
       -- disabled_tools = avante_disabled_tools,
       -- system_prompt = avante_system_prompt,
@@ -315,12 +342,12 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
       -- "hrsh7th/nvim-cmp",           -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "ibhagwan/fzf-lua",              -- for file_selector provider fzf
       "echasnovski/mini.icons",
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "zbirenbaum/copilot.lua",        -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
