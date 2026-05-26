@@ -2,4 +2,4 @@ require("todo-comments").setup()
 
 vim.keymap.set("n", "<leader>tT", function()
   vim.cmd(":TodoTelescope")
-end)
+end, { desc = "Find TODO comments" })
