@@ -21,33 +21,34 @@ local avante_rag_service = {
 }
 
 local avante_providers = {
-  avante_commands = {
-    name = "avante_commands",
-    module = "blink.compat.source",
-    score_offset = 90, -- show at a higher priority than lsp
-    opts = {},
-  },
-  avante_files = {
-    name = "avante_files",
-    module = "blink.compat.source",
-    score_offset = 100, -- show at a higher priority than lsp
-    opts = {},
-  },
-  avante_mentions = {
-    name = "avante_mentions",
-    module = "blink.compat.source",
-    score_offset = 1000, -- show at a higher priority than lsp
-    opts = {},
-  },
-  avante_shortcuts = {
-    name = "avante_shortcuts",
-    module = "blink.compat.source",
-    score_offset = 1000, -- show at a higher priority than lsp
-    opts = {},
-  },
-  gemini = {
-    -- model = "gemini-2.5-flash-preview-04-17",
-    model = "gemini-2.5-flash-preview-05-20",
+  -- avante_commands = {
+  --   name = "avante_commands",
+  --   module = "blink.compat.source",
+  --   score_offset = 90, -- show at a higher priority than lsp
+  --   opts = {},
+  -- },
+  -- avante_files = {
+  --   name = "avante_files",
+  --   module = "blink.compat.source",
+  --   score_offset = 100, -- show at a higher priority than lsp
+  --   opts = {},
+  -- },
+  -- avante_mentions = {
+  --   name = "avante_mentions",
+  --   module = "blink.compat.source",
+  --   score_offset = 1000, -- show at a higher priority than lsp
+  --   opts = {},
+  -- },
+  -- avante_shortcuts = {
+  --   name = "avante_shortcuts",
+  --   module = "blink.compat.source",
+  --   score_offset = 1000, -- show at a higher priority than lsp
+  --   opts = {},
+  -- },
+
+  ["gemini-3.5"] = {
+    __inherited_from = "gemini",
+    model = "gemini-3.5-flash",
   },
   bedrock = {
     model = os.getenv("AVANTE_BEDROCK_MODEL") or "anthropic.claude-3-5-sonnet-20241022-v2:0",
@@ -105,31 +106,35 @@ local avante_providers = {
       max_tokens = 65536,
     },
   },
-  gemini_pro = {
-    __inherited_from = "gemini",
-    model = "gemini-2.5-pro-preview-03-25",
+  ["copilot-gaa"] = {
+    __inherited_from = "copilot",
+    model = "gpt-5-mini",
   },
-  gemini_litellm = {
-    __inherited_from = "gemini",
-    endpoint = (os.getenv("LITELLM_HOST") or "") .. "/gemini/v1beta/models",
-    api_key_name = "LITELLM_KEY",
-  },
-  ollama_litellm = {
-    __inherited_from = "openai",
-    endpoint = os.getenv("LITELLM_HOST"),
-    model = "qwen2-5",
-    max_completion_tokens = nil,
-    api_key_name = "LITELLM_KEY",
-  },
-  groq = { -- define groq provider
-    __inherited_from = "openai",
-    api_key_name = "GROQ_API_KEY",
-    endpoint = "https://api.groq.com/openai/v1/",
-    model = "llama-3.3-70b-versatile",
-    extra_request_body = {
-      max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
-    },
-  },
+  -- gemini_pro = {
+  --   __inherited_from = "gemini",
+  --   model = "gemini-2.5-pro-preview-03-25",
+  -- },
+  -- gemini_litellm = {
+  --   __inherited_from = "gemini",
+  --   endpoint = (os.getenv("LITELLM_HOST") or "") .. "/gemini/v1beta/models",
+  --   api_key_name = "LITELLM_KEY",
+  -- },
+  -- ollama_litellm = {
+  --   __inherited_from = "openai",
+  --   endpoint = os.getenv("LITELLM_HOST"),
+  --   model = "qwen2-5",
+  --   max_completion_tokens = nil,
+  --   api_key_name = "LITELLM_KEY",
+  -- },
+  -- groq = { -- define groq provider
+  --   __inherited_from = "openai",
+  --   api_key_name = "GROQ_API_KEY",
+  --   endpoint = "https://api.groq.com/openai/v1/",
+  --   model = "llama-3.3-70b-versatile",
+  --   extra_request_body = {
+  --     max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+  --   },
+  -- },
 }
 
 local tmux_tool = {
@@ -317,21 +322,16 @@ return {
         desc = "Avante: New Chat",
       },
     },
+    ---@type avante.Config
     opts = {
       instructions_file = "avante.md",
       debug = os.getenv("NVIM_AVANTE_DEV") == "true",
-      provider = os.getenv("AVANTE_PROVIDER") or "copilot",
+      -- provider = os.getenv("AVANTE_PROVIDER") or "copilot",
+      provider = "copilot-gaa",
       auto_suggestions_provider = nil,
       mode = "agentic",
-      behaviour = {
-        enable_cursor_planning_mode = true,
-      },
-      -- cursor_applying_provider = "gemini_pro",
       providers = avante_providers,     -- Providers configuration
       rag_service = avante_rag_service, -- RAG service configuration
-      -- disabled_tools = avante_disabled_tools,
-      -- system_prompt = avante_system_prompt,
-      -- custom_tools = avante_custom_tools,
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
