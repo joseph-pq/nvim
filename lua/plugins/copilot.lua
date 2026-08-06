@@ -283,33 +283,21 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    enabled = false,
     opts = {
-      strategies = {
+      interactions = {
         chat = {
-          adapter = "copilot",
-          -- adapter = {
-          --   name = "copilot",
-          --   -- model = "claude-sonnet-3.7",
-          -- },
-        },
-        inline = {
-          adapter = "copilot",
-          -- adapter = {
-          --   name = "copilot",
-          --   -- model = "claude-sonnet-3-7",
-          -- },
+          adapter = {
+            name = "gemini",
+            model = "gemini-3.5-flash",
+          },
         },
       },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
     },
   },
   {
     "yetone/avante.nvim",
     dev = os.getenv("NVIM_AVANTE_DEV") == "true",
+    enabled = false,
     -- enable = false,
     event = "VeryLazy",
     version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
@@ -348,31 +336,36 @@ return {
       "ibhagwan/fzf-lua",              -- for file_selector provider fzf
       "echasnovski/mini.icons",
       "zbirenbaum/copilot.lua",        -- for providers='copilot'
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        event = "VeryLazy",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            use_absolute_path = false,
-          },
-          filetypes = {
-            markdown = {
-              template = '<center><img src="$FILE_PATH" alt="$CURSOR"/></center>',
-            },
-          },
+    },
+  },
+  {
+    -- support for image pasting
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- recommended settings
+      default = {
+        embed_image_as_base64 = false,
+        prompt_for_file_name = false,
+        drag_and_drop = {
+          insert_mode = true,
         },
-        keys = {
-          -- suggested keymap
-          { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+        use_absolute_path = false,
+      },
+      filetypes = {
+        markdown = {
+          template = '<center><img src="$FILE_PATH" alt="$CURSOR"/></center>',
+        },
+        codecompanion = {
+          prompt_for_file_name = false,
+          template = "[Image]($FILE_PATH)",
+          use_absolute_path = true,
         },
       },
+    },
+    keys = {
+      -- suggested keymap
+      { "<leader>pi", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
     },
   },
 }
