@@ -283,6 +283,9 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    keys = {
+      { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
+    },
     opts = {
       interactions = {
         chat = {
