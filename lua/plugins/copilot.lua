@@ -13,11 +13,96 @@ local avante_disabled_tools = {
 
 local avante_rag_service = {
   enabled = os.getenv("AVANTE_RAG_HOST_MOUNT") ~= nil and os.getenv("AVANTE_RAG_HOST_MOUNT") ~= "", -- Enables the RAG service only if the environment variable exists and is not empty
-  host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"),                                                  -- Host mount path for the rag service
-  provider = "ollama",                                                                              -- The provider to use for RAG service (e.g. openai or ollama)
-  llm_model = os.getenv("AVANTE_OLLAMA_MODEL"),                                                     -- The LLM model to use for RAG service
-  embed_model = "nomic-embed-text",                                                                 -- The embedding model to use for RAG service
-  endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"),                                                   -- The API endpoint for RAG service
+  host_mount = os.getenv("AVANTE_RAG_HOST_MOUNT"), -- Host mount path for the rag service
+  provider = "ollama", -- The provider to use for RAG service (e.g. openai or ollama)
+  llm_model = os.getenv("AVANTE_OLLAMA_MODEL"), -- The LLM model to use for RAG service
+  embed_model = "nomic-embed-text", -- The embedding model to use for RAG service
+  endpoint = os.getenv("AVANTE_OLLAMA_ENDPOINT"), -- The API endpoint for RAG service
+}
+
+local codecompanion_history = {
+  enabled = true,
+  opts = {
+    -- Keymap to open history from chat buffer (default: gh)
+    keymap = "gh",
+    -- Keymap to save the current chat manually (when auto_save is disabled)
+    save_chat_keymap = "sc",
+    -- Save all chats by default (disable to save only manually using 'sc')
+    auto_save = true,
+    -- Number of days after which chats are automatically deleted (0 to disable)
+    expiration_days = 0,
+    -- Picker interface (auto resolved to a valid picker)
+    picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
+    ---Optional filter function to control which chats are shown when browsing
+    chat_filter = nil, -- function(chat_data) return boolean end
+    -- Customize picker keymaps (optional)
+    picker_keymaps = {
+      rename = { n = "r", i = "<M-r>" },
+      delete = { n = "d", i = "<M-d>" },
+      duplicate = { n = "<C-y>", i = "<C-y>" },
+    },
+    ---Automatically generate titles for new chats
+    auto_generate_title = true,
+    title_generation_opts = {
+      ---Adapter for generating titles (defaults to current chat adapter)
+      adapter = nil, -- "copilot"
+      ---Model for generating titles (defaults to current chat model)
+      model = nil, -- "gpt-4o"
+      ---Number of user prompts after which to refresh the title (0 to disable)
+      refresh_every_n_prompts = 0, -- e.g., 3 to refresh after every 3rd user prompt
+      ---Maximum number of times to refresh the title (default: 3)
+      max_refreshes = 3,
+      format_title = function(original_title)
+        -- this can be a custom function that applies some custom
+        -- formatting to the title.
+        return original_title
+      end,
+    },
+    ---On exiting and entering neovim, loads the last chat on opening chat
+    continue_last_chat = false,
+    ---When chat is cleared with `gx` delete the chat from history
+    delete_on_clearing_chat = false,
+    ---Directory path to save the chats
+    dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
+    ---Enable detailed logging for history extension
+    enable_logging = false,
+
+    -- Summary system
+    summary = {
+      -- Keymap to generate summary for current chat (default: "gcs")
+      create_summary_keymap = "gcs",
+      -- Keymap to browse summaries (default: "gbs")
+      browse_summaries_keymap = "gbs",
+
+      generation_opts = {
+        adapter = nil, -- defaults to current chat adapter
+        model = nil, -- defaults to current chat model
+        context_size = 90000, -- max tokens that the model supports
+        include_references = true, -- include slash command content
+        include_tool_outputs = true, -- include tool execution results
+        system_prompt = nil, -- custom system prompt (string or function)
+        format_summary = nil, -- custom function to format generated summary e.g to remove <think/> tags from summary
+      },
+    },
+
+    -- Memory system (requires VectorCode CLI)
+    memory = {
+      -- Automatically index summaries when they are generated
+      auto_create_memories_on_summary_generation = true,
+      -- Path to the VectorCode executable
+      vectorcode_exe = "vectorcode",
+      -- Tool configuration
+      tool_opts = {
+        -- Default number of memories to retrieve
+        default_num = 10,
+      },
+      -- Enable notifications for indexing progress
+      notify = true,
+      -- Index all existing memories on startup
+      -- (requires VectorCode 0.6.12+ for efficient incremental indexing)
+      index_on_startup = false,
+    },
+  },
 }
 
 local avante_providers = {
@@ -138,10 +223,10 @@ local avante_providers = {
 }
 
 local tmux_tool = {
-  name = "execute_tmux_command",              -- Unique name for the new tool
+  name = "execute_tmux_command", -- Unique name for the new tool
   description = "Execute a bash command in and retrieve results",
   command = "tmux send-keys -t $TMUX_WINDOW", -- Base command to send keys to tmux
-  param = {                                   -- Input parameters
+  param = { -- Input parameters
     type = "table",
     fields = {
       {
@@ -160,8 +245,7 @@ local tmux_tool = {
     },
     {
       name = "error",
-      description =
-      "0 if successful. If the value is between 1 and 255, it indicates a bash error. A value of 256 means the command did not finish. Otherwise, it is the error message.",
+      description = "0 if successful. If the value is between 1 and 255, it indicates a bash error. A value of 256 means the command did not finish. Otherwise, it is the error message.",
       type = "string",
       optional = true,
     },
@@ -286,6 +370,9 @@ return {
     keys = {
       { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion Chat" },
     },
+    dependencies = {
+      "ravitemer/codecompanion-history.nvim",
+    },
     opts = {
       interactions = {
         chat = {
@@ -307,8 +394,8 @@ return {
             ".github/copilot-instructions.md",
             "AGENT.md",
             "AGENTS.md",
-            { path = "CLAUDE.md",           parser = "claude" },
-            { path = "CLAUDE.local.md",     parser = "claude" },
+            { path = "CLAUDE.md", parser = "claude" },
+            { path = "CLAUDE.local.md", parser = "claude" },
             { path = "~/.claude/CLAUDE.md", parser = "claude" },
           },
           is_preset = true,
@@ -319,6 +406,9 @@ return {
             enabled = true,
           },
         },
+      },
+      extensions = {
+        history = codecompanion_history,
       },
     },
   },
@@ -346,7 +436,7 @@ return {
       provider = "copilot-gaa",
       auto_suggestions_provider = nil,
       mode = "agentic",
-      providers = avante_providers,     -- Providers configuration
+      providers = avante_providers, -- Providers configuration
       rag_service = avante_rag_service, -- RAG service configuration
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -358,12 +448,12 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
-      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
       -- "hrsh7th/nvim-cmp",           -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua",              -- for file_selector provider fzf
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
       "echasnovski/mini.icons",
-      "zbirenbaum/copilot.lua",        -- for providers='copilot'
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
     },
   },
   {
