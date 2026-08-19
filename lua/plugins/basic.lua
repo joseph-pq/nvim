@@ -119,15 +119,14 @@ return {
   -- Highlight, edit, and navigate code
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
     dependencies = { "nvim-treesitter" },
-  },
-  --- This is used for my own plugins
-  {
-    "nvim-treesitter/playground",
   },
   {
     "mbbill/undotree",
