@@ -3,6 +3,7 @@ local ts = require("nvim-treesitter")
 ts.setup({})
 
 ts.install({
+  "gitcommit",
   "vimdoc",
   "vim",
   "query",
