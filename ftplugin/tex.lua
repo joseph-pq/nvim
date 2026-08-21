@@ -9,3 +9,7 @@ vim.opt.wrap = true
 vim.opt.textwidth = 0
 -- vim.opt.columns=80
 vim.opt.conceallevel = 0  -- Disable special rendering of certain characters
+
+vim.keymap.set("n", "<leader>tmh", function()
+  Snacks.picker("vimtex_toc", { layers = "c" })
+end, { buffer = true, desc = "LaTeX document headings" })

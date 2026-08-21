@@ -14,7 +14,7 @@ return {
     opts = {},
     ft = { "markdown" }, -- Load only for markdown files.
     keys = {
-      { "<leader>tmh", "<cmd>MDHeaders<CR>" },
+      { "<leader>tmh", "<cmd>MDHeaders<CR>", ft = "markdown" },
     },
   },
   {
