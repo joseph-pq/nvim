@@ -4,8 +4,6 @@ return {
   filetypes = { "lua" },
   root_markers = {
     ".luarc.json",
-    ".git",
-    ".luarc.json",
     ".luarc.jsonc",
     ".luacheckrc",
     ".stylua.toml",
@@ -16,7 +14,7 @@ return {
   },
   settings = {
     Lua = {
-      competion = {
+      completion = {
         callSnippet = "Replace",
       },
       runtime = {

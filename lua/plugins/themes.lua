@@ -1,25 +1,23 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = true,
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    lazy = true,
     opts = {
       transparent_background = true,
     },
   },
   {
     "navarasu/onedark.nvim",
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = true,
     opts = {
       transparent = true,
       style = "warmer",
@@ -27,7 +25,8 @@ return {
   },
   {
     "Aejkatappaja/cendre",
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
       background = "hard",
