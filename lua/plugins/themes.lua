@@ -25,4 +25,13 @@ return {
       style = "warmer",
     },
   },
+  {
+    "Aejkatappaja/cendre",
+    priority = 1000, -- make sure to load this before all the other start plugins
+    opts = {
+      transparent = true,
+      background = "hard",
+      italic_virtual_text = false,
+    },
+  },
 }
