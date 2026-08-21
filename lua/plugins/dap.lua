@@ -103,6 +103,7 @@ return {
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
+      "mfussenegger/nvim-dap-python",
     },
     keys = {
       {
@@ -220,6 +221,12 @@ return {
       },
     },
     config = function()
+      require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" } })
+
+      local dap_python = require("dap-python")
+      dap_python.setup("python")
+      dap_python.test_runner = "pytest"
+
       vim.cmd("hi DapBreakpointColor guifg=#fa4848")
       vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
       vim.cmd("hi DapStoppedColor guifg=#78f542")
@@ -232,5 +239,4 @@ return {
     end,
   },
   { "nvim-telescope/telescope-dap.nvim" },
-  { "mfussenegger/nvim-dap-python" },
 }

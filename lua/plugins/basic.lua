@@ -130,6 +130,9 @@ return {
   },
   {
     "mbbill/undotree",
+    keys = {
+      { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle undo tree" },
+    },
   },
   { "lukas-reineke/indent-blankline.nvim" }, -- Indent guides
   { "tpope/vim-sleuth" }, -- Automatically set indent settings
@@ -141,14 +144,33 @@ return {
     "williamboman/mason.nvim",
     opts = {},
   },
-  { "folke/zen-mode.nvim" },
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        width = 90,
+        options = { number = true, relativenumber = true },
+      },
+    },
+    keys = {
+      {
+        "<leader>zz",
+        function()
+          require("zen-mode").toggle()
+          vim.wo.wrap = false
+        end,
+        desc = "Toggle Zen Mode",
+      },
+    },
+  },
   { "christoomey/vim-system-copy" },
   { "vim-scripts/argtextobj.vim" },
-  { "j-hui/fidget.nvim" },
+  { "j-hui/fidget.nvim", event = "LspAttach", opts = {} },
   { "neomake/neomake" },
   -- tests
   {
     "nvim-neotest/neotest",
+    ft = "python",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -167,6 +189,10 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    opts = {},
+    keys = {
+      { "<leader>tT", "<cmd>TodoTelescope<CR>", desc = "Find TODO comments" },
+    },
   },
   -- flutter
   {
@@ -179,6 +205,43 @@ return {
   -- python repl
   {
     "Vigemus/iron.nvim",
+    ft = { "python", "sh" },
+    keys = {
+      { "<space>rs", "<cmd>IronRepl<CR>", desc = "Open Iron REPL" },
+      { "<space>rr", "<cmd>IronRestart<CR>", desc = "Restart Iron REPL" },
+      { "<space>rf", "<cmd>IronFocus<CR>", desc = "Focus Iron REPL" },
+      { "<space>rh", "<cmd>IronHide<CR>", desc = "Hide Iron REPL" },
+    },
+    config = function()
+      local iron = require("iron.core")
+      iron.setup({
+        config = {
+          scratch_repl = true,
+          repl_definition = {
+            python = { command = { "python" } },
+            sh = { command = { "zsh" } },
+          },
+          repl_open_cmd = require("iron.view").right(80),
+        },
+        keymaps = {
+          send_motion = "<space>sc",
+          visual_send = "<space>sc",
+          send_file = "<space>sf",
+          send_line = "<space>sl",
+          send_until_cursor = "<space>su",
+          send_mark = "<space>sm",
+          mark_motion = "<space>mc",
+          mark_visual = "<space>mc",
+          remove_mark = "<space>md",
+          cr = "<space>s<cr>",
+          interrupt = "<space>s<space>",
+          exit = "<space>sq",
+          clear = "<space>cl",
+        },
+        highlight = { italic = true },
+        ignore_blank_lines = true,
+      })
+    end,
   },
   -- datascience
   {

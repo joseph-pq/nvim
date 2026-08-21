@@ -3,6 +3,50 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>tF", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+      { "<leader>tB", function() require("telescope.builtin").buffers() end, desc = "Find buffers" },
+      { "<leader>tl", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+      { "<leader>tH", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
+      { "<leader>tD", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
+      {
+        "<leader>tG",
+        function() require("telescope.builtin").git_files({ recurse_submodules = true }) end,
+        desc = "Find git files (including submodules)",
+      },
+      {
+        "<leader>tg",
+        function() require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") }) end,
+        desc = "Grep for string",
+      },
+      {
+        "<leader>tc",
+        function()
+          local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+          if vim.v.shell_error ~= 0 then
+            vim.notify("Not inside a Git repository", vim.log.levels.WARN)
+            return
+          end
+          require("telescope.builtin").find_files({ cwd = git_root .. "/configs", no_ignore = true })
+        end,
+        desc = "Find files in config directory",
+      },
+      {
+        "<leader>tC",
+        function()
+          local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+          if vim.v.shell_error ~= 0 then
+            vim.notify("Not inside a Git repository", vim.log.levels.WARN)
+            return
+          end
+          require("telescope.builtin").find_files({
+            cwd = git_root,
+            find_command = { "fdfind", "--type", "f", "--hidden", "--no-ignore", "--max-depth", "1", "--glob", ".env*" },
+          })
+        end,
+        desc = "Find .env* files in git root",
+      },
+    },
   },
   {
     "3rd/image.nvim",
