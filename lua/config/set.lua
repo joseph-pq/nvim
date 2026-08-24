@@ -12,8 +12,6 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
-
 -- swap files
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -40,3 +38,5 @@ vim.g.mapleader = "\\"
 vim.g.python3_host_prog = os.getenv("HOME") .. "/.config/nvim/.venv/bin/python"
 
 vim.opt.conceallevel = 1
+
+vim.opt.wrap = true
