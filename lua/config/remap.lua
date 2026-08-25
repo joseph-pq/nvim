@@ -1,8 +1,8 @@
 vim.g.mapleader = "\\"
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selected line down
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selected line up
+-- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selected line down
+-- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selected line up
 
 vim.keymap.set("n", "J", "mzJ`z") -- delete the line below
 vim.keymap.set("n", "<C-d>", "<C-d>zz") -- scroll down but centered
@@ -85,3 +85,12 @@ vim.api.nvim_create_user_command("WordCount", function()
   local word_count = #vim.split(line, "%s+")
   print("Word count: " .. word_count)
 end, {})
+
+
+vim.api.nvim_create_user_command("Split", function(opts)
+  vim.cmd(string.format(
+    [[%d,%ds/\([.!?]\)\s\+/\1\r/g]],
+    opts.line1,
+    opts.line2
+  ))
+end, { range = true })
