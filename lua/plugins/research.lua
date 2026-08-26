@@ -1,7 +1,6 @@
 return {
   {
     "jmbuhr/telescope-zotero.nvim",
-    dev = true,
     dependencies = {
       { "kkharji/sqlite.lua" },
     },
