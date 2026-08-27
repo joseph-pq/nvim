@@ -9,6 +9,7 @@ return {
       { "<leader>tl", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
       { "<leader>tH", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
       { "<leader>tD", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
+      { "<leader>tk", function() require("telescope.builtin").keymaps() end, desc = "Search keymaps" },
       {
         "<leader>tG",
         function() require("telescope.builtin").git_files({ recurse_submodules = true }) end,

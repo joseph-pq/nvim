@@ -94,3 +94,8 @@ vim.api.nvim_create_user_command("Split", function(opts)
     opts.line2
   ))
 end, { range = true })
+
+-- Copy relative buffer path to clipboard
+vim.keymap.set("n", "<leader>yp", function()
+  vim.fn.setreg("+", vim.fn.expand("%:."))
+end, { desc = "Copy relative buffer path" })
