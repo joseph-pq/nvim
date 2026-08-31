@@ -155,7 +155,9 @@ return {
       diagnosticsDelay = 300,
       latexFormatter = 'latexindent',
       latexindent = {
-        ['local'] = nil, -- local is a reserved keyword
+        -- latexindent defaults to tabs. Keep its output aligned with the
+        -- buffer-local two-space settings in ftplugin/tex.lua.
+        ['local'] = vim.fn.stdpath('config') .. '/latexindent.yaml', -- local is a reserved keyword
         modifyLineBreaks = false,
       },
       bibtexFormatter = 'texlab',

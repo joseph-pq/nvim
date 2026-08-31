@@ -1,0 +1,4 @@
+# Formatting policy used by TexLab when it invokes latexindent.
+# latexindent defaults to a literal tab character, which renders at Neovim's
+# default tab width of eight columns.
+defaultIndent: "  "
