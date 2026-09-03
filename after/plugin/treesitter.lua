@@ -18,6 +18,7 @@ ts.install({
   "http",
   "html",
   "css",
+  "bash",
   -- "norg",
   "scss",
   "svelte",
