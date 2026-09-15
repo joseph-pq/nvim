@@ -25,6 +25,9 @@ return {
       html = { enabled = false },
       latex = { enabled = false },
       file_types = { "markdown", "Avante" },
+      code = {
+        border = "thin", -- Keep fence rows visible to prevent layout jumps.
+      },
       heading = {
         backgrounds = {},
       },
