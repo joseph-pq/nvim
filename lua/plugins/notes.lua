@@ -29,7 +29,8 @@ return {
         border = "thin", -- Keep fence rows visible to prevent layout jumps.
       },
       heading = {
-        backgrounds = {},
+        -- backgrounds = {},
+        position = "inline",
       },
       checkbox = {
         enabled = true,
