@@ -12,7 +12,7 @@
 
 ---@type vim.lsp.Config
 return {
-  cmd = { "ruff", "server" },
+  cmd = { "uv", "run", "--", "ruff", "server" },
   root_markers = { ".git", "setup.py", "setup.cfg", "pyproject.toml" },
   filetypes = { "python" },
   init_options = {
